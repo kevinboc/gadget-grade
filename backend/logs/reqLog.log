@@ -1,0 +1,8 @@
+20230323	00:02:05	339ea4ea-fdc7-4619-ac11-42cbdf81304a	GET	/	undefined
+20230323	00:02:05	55c3795e-d91b-431a-9de4-6c626e311ede	GET	/css/style.css	undefined
+20230323	00:09:24	d2d04829-a09c-4ff3-9f9d-bd00d31245f4	OPTIONS	/	https://www.google.com
+20230323	00:09:24	a75e5921-1558-4df1-88ed-1f8f5ef50ca6	GET	/	https://www.google.com
+20230323	00:17:14	b29f1480-658c-4b60-b8fa-80f4ce7fac18	OPTIONS	/	https://www.google.com
+20230323	00:17:14	baf60b94-9d4a-4bed-b46c-3223c8f397ca	GET	/	https://www.google.com
+20230323	00:25:28	30c89df4-ec98-4375-8317-5b2cb76eaa24	OPTIONS	/	https://www.google.com
+20230323	00:25:28	173cf27a-53e4-4212-babe-5800e7caa950	GET	/	https://www.google.com
