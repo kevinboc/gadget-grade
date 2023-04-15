@@ -36,7 +36,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(uri); 
 
 //add product route
-Product = require('./models/product.js');
+Product = require('./models/Product.js');
 var productRoute = require('./routes/productRoutes');
 app.use('/product', productRoute);
 
