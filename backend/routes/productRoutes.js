@@ -6,7 +6,10 @@ router.route("")
     .get(controller.getAllProducts)
     .post(controller.addProduct);
 
-router.route("/:_PID")
+router.route("/category/:category")
+    .get(controller.getCategory);
+
+router.route("/:_id")
     .get(controller.getProduct)
     .put(controller.updateProduct)
 
