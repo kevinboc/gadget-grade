@@ -6,7 +6,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     productID: {
-        type: String,
+        type: Number,
         required: true
     },
     description: {
@@ -14,7 +14,11 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     rating: {
-        type: Decimal128,
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
         required: true
     }
 });
