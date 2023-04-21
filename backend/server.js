@@ -7,6 +7,7 @@ const errorHandler = require('./middleware/errorHandler');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
+const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3500;
 
 console.log(process.env.NODE_ENV);
@@ -23,6 +24,22 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/root'));
 
+app.use(errorHandler);
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+//connect mongoose to mongoDB
+mongoose = require('mongoose');
+const uri = "mongodb+srv://gadget-grade-admin:DbpN0ELqr48BuVm4@cluster0.2hwjbnu.mongodb.net/?retryWrites=true&w=majority";
+mongoose.Promise = global.Promise;
+mongoose.connect(uri); 
+
+//add account route
+User = require('./models/User.js');
+var userRoute = require('./routes/userRoutes');
+app.use('/user', userRoute);
+
 app.all('*', (req, res) => {
     res.status(404);
     if(req.accepts('html')) {
@@ -35,8 +52,6 @@ app.all('*', (req, res) => {
         res.type('txt').send('404 Not Found');
     }
 })
-
-app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

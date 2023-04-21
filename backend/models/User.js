@@ -21,10 +21,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    userID: {
-        type: ObjectId,
-        required: true
-    },
     active: {
         type: Boolean,
         required: true

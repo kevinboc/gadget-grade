@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     rating: {
-        type: Decimal128,
+        type: Number,
         required: true
     }
 });
