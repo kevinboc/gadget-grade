@@ -35,10 +35,17 @@ const uri = "mongodb+srv://gadget-grade-admin:DbpN0ELqr48BuVm4@cluster0.2hwjbnu.
 mongoose.Promise = global.Promise;
 mongoose.connect(uri); 
 
+
+//add account route
+User = require('./models/User.js');
+var userRoute = require('./routes/userRoutes');
+app.use('/user', userRoute);
+
 //add product route
 Product = require('./models/Product.js');
 var productRoute = require('./routes/productRoutes');
 app.use('/product', productRoute);
+
 
 app.all('*', (req, res) => {
     res.status(404);
