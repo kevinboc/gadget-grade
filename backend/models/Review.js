@@ -1,16 +1,9 @@
 const mongoose = require('mongoose');
 
 const reviewSchema = new mongoose.Schema({
-    userID: {
-        type: String,
-        required: true
-    },
-    reviewID: {
-        type: ObjectId,
-        required: true
-    },
-    productID: {
-        type: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     body: {
@@ -19,19 +12,28 @@ const reviewSchema = new mongoose.Schema({
     },
     timeStamp: {
         type: Date,
-        timestamps: true,
+        default: Date.now,
         required: true
     },
     rating: {
-        type: String,
+        type: Number,
+        min: 0,
+        max: 5,
         required: true
     },
     like: {
         type: Number,
+        default: 0,
         required: true
     },
     dislike: {
         type: Number,
+        default: 0,
+        required: true
+    },
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
         required: true
     }
 });

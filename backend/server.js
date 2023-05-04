@@ -46,6 +46,10 @@ Product = require('./models/Product.js');
 var productRoute = require('./routes/productRoutes');
 app.use('/product', productRoute);
 
+//add review route
+Review = require('./models/Review.js');
+var reviewRoute = require('./routes/reviewRoutes');
+app.use('/review', reviewRoute);
 
 app.all('*', (req, res) => {
     res.status(404);
