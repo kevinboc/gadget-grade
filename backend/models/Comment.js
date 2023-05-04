@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 
 const commentSchema = new mongoose.Schema({
-    userID: {
-        type: String,
-        required: true
-    },
-    reviewID: {
-        type: String,
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
         required: true
     },
     body: {
@@ -15,7 +12,12 @@ const commentSchema = new mongoose.Schema({
     },
     timeStamp: {
         type: Date,
-        timestamps: true,
+        default: Date.now,
+        required: true
+    },
+    review: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Review',
         required: true
     }
 });
