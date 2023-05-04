@@ -47,6 +47,11 @@ var productRoute = require('./routes/productRoutes');
 app.use('/product', productRoute);
 
 
+//add comment route
+Review = require('./models/Comment.js');
+var commentRoute = require('./routes/commentRoutes');
+app.use('/comment', commentRoute);
+
 app.all('*', (req, res) => {
     res.status(404);
     if(req.accepts('html')) {
