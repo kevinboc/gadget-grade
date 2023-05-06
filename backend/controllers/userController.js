@@ -48,7 +48,8 @@ exports.verifyLogin = async function(req,res) {
   try {
     const user = await User.findOne({username: req.body.username});
     if (user) {
-      if(user.password == req.body.password) {
+      const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+      if(passwordMatch) {
         res.status(200).json(user);
       } else {
         res.status(500).send({message: 'Login not valid.'});
