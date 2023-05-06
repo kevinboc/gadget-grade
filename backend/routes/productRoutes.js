@@ -9,6 +9,9 @@ router.route("")
 router.route("/category/:category")
     .get(controller.getCategory)
 
+router.route("/search/:searchTerm")
+    .get(controller.searchProducts)
+
 router.route("/trending")
     .get(controller.getTrendingProducts)
 

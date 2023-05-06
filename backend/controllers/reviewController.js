@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-User = mongoose.model('Review');
+Review = mongoose.model('Review');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.addReview = async function(req, res) {
@@ -41,7 +41,7 @@ exports.getRecentReviews = async function(req, res) {
 
 exports.getReview = async function(req, res) {
     try {
-      const review = await Review.findById(req.params.id);
+      const review = await Review.findById(req.params._id);
       if (review) {
         res.status(200).json(review);
       } else {

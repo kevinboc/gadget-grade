@@ -31,7 +31,6 @@ exports.getCategory = async function(req,res) {
 }
 
 exports.getProduct = async function(req, res) {
-  console.log(req.params._id);
   try {
     const product = await Product.findById(req.params._id);
     if (product) {
@@ -53,6 +52,21 @@ exports.updateProduct = async function(req, res) {
     res.status(500).send({message: 'An error occurred updating product.'});
   }  
 }
+
+exports.searchProducts = async function(req, res) {
+  const searchTerm = req.params.searchTerm;
+  if (!searchTerm) {
+      res.status(400).json({ message: 'Search term is required' });
+      return;
+  }
+  try {
+      const products = await Product.find({$text: {$search: searchTerm}});
+      res.status(200).json(products);
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'An error occurred while searching for products' });
+  }
+};
 
 exports.getTrendingProducts = async function(req, res) {
     try {
