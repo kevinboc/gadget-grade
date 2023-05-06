@@ -4,10 +4,13 @@ var controller = require('../controllers/productController.js');
   
 router.route("")
     .get(controller.getAllProducts)
-    .post(controller.addProduct);
+    .post(controller.addProduct)
 
 router.route("/category/:category")
-    .get(controller.getCategory);
+    .get(controller.getCategory)
+
+router.route("/trending")
+    .get(controller.getTrendingProducts)
 
 router.route("/:_id")
     .get(controller.getProduct)
