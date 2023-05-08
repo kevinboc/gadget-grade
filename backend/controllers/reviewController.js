@@ -1,11 +1,23 @@
 var mongoose = require('mongoose'),
 Review = mongoose.model('Review');
+Product = mongoose.model('Product');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.addReview = async function(req, res) {
+    // create new review object
     var newReview = new Review(req.body);
     try {
+      // save review
       const savedReview = await newReview.save();
+      // get product associated with review
+      const product = await Product.findById(req.body.product);
+      // calculate new product rating
+      product.reviewCount++;
+      product.ratingCount =  Number(product.ratingCount) + Number(req.body.rating);
+      product.rating = Number(product.ratingCount / product.reviewCount).toFixed(1);
+      // update product in db
+      const updatedProduct = await Product.findByIdAndUpdate(req.body.product, product, {new:true});
+      console.log(updatedProduct);
       res.status(201).json(savedReview);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while adding the review.'});
