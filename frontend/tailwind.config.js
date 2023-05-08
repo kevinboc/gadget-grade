@@ -7,7 +7,12 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: '#222831',
+        backgroundColor: "#222831",
+        borderColor: "#BDC1C5",
+        buttonColor: "#46C263",
+      },
+      gridAutoColumns: {
+        'mobile': 'min(40%)',
       }
     },
   },
