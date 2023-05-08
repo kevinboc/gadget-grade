@@ -85,7 +85,7 @@ const Home = () => {
           {/* Recent Activity Title */}
           <p className="text-center sm:text-white font-sans py-5 sm:mb-10 sm:bg-backgroundColor"> Recent Activity</p>
           {/* Recent Activity Grid */}
-          <div className="grid grid-flow-col auto-cols-mobile overflow-x-auto gap-x-10 sm:grid-flow-row sm:grid-cols-5 sm:gap-10">
+          <div className="grid grid-flow-col auto-cols-mobile overflow-x-auto gap-x-10 mx-3 sm:mx-0 sm:grid-flow-row sm:grid-cols-5 sm:gap-10">
             {/* Recent Activity */}
             <div className="flex flex-col border border-solid border-borderColor rounded-md p-5">
               {/* Title */}
