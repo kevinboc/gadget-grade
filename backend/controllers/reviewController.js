@@ -17,7 +17,6 @@ exports.addReview = async function(req, res) {
       product.rating = Number(product.ratingCount / product.reviewCount).toFixed(1);
       // update product in db
       const updatedProduct = await Product.findByIdAndUpdate(req.body.product, product, {new:true});
-      console.log(updatedProduct);
       res.status(201).json(savedReview);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while adding the review.'});
