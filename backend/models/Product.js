@@ -20,6 +20,14 @@ const productSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true
+    },
+    ratingCount: {
+        type: Number,
+        required: true
+    },
+    reviewCount: {
+        type: Number,
+        require: true
     }
 });
 
