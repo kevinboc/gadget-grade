@@ -37,7 +37,7 @@ exports.getCategory = async function(req,res) {
     if (sortField) {
         sortObject[sortField] = sortOrder;
     }
-    const products = await   Product.find({category: req.params.category}).sort(sortObject);
+    const products = await   Product.find({categories: {$in: req.params.category}}).sort(sortObject);
     res.status(200).json(products);
   } catch (err) {
     res.status(500).send({message: 'An error occurred retrieving category.'});
