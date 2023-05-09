@@ -14,8 +14,15 @@ exports.addComment = async function(req, res) {
   
 exports.getReviewComments = async function(req, res) {
     try {
-        const comments = await Comment.find({review: req.params.reviewId})
-        res.status(200).json(comments);
+      const sortField = req.query.sort;
+      const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+      // Build the sort object
+      const sortObject = {};
+      if (sortField) {
+          sortObject[sortField] = sortOrder;
+      }
+      const comments = await Comment.find({review: req.params.reviewId}).sort(sortObject);
+      res.status(200).json(comments);
     } catch (err) {
         res.status(500).send({message: 'An error occurred while getting the review comments.'});
     }
@@ -23,8 +30,15 @@ exports.getReviewComments = async function(req, res) {
 
 exports.getUserComments = async function(req, res) {
     try {
-        const comments = await Comment.find({author: req.params.userId})
-        res.status(200).json(comments);
+      const sortField = req.query.sort;
+      const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+      // Build the sort object
+      const sortObject = {};
+      if (sortField) {
+          sortObject[sortField] = sortOrder;
+      }
+      const comments = await Comment.find({author: req.params.userId}).sort(sortObject);
+      res.status(200).json(comments);
     } catch (err) {
         res.status(500).send({message: 'An error occurred while getting the user comments.'});
     }

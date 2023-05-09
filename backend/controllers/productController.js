@@ -14,7 +14,14 @@ exports.addProduct = async function(req, res) {
   
 exports.getAllProducts = async function(req, res) {
     try {
-      const products = await Product.find({});
+      const sortField = req.query.sort;
+      const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+      // Build the sort object
+      const sortObject = {};
+      if (sortField) {
+          sortObject[sortField] = sortOrder;
+      }
+      const products = await Product.find({}).sort(sortObject);
       res.status(200).json(products);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while retrieving the products.'});
@@ -23,7 +30,14 @@ exports.getAllProducts = async function(req, res) {
 
 exports.getCategory = async function(req,res) {
   try {
-    const products = await   Product.find({category: req.params.category})
+    const sortField = req.query.sort;
+    const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+    // Build the sort object
+    const sortObject = {};
+    if (sortField) {
+        sortObject[sortField] = sortOrder;
+    }
+    const products = await   Product.find({category: req.params.category}).sort(sortObject);
     res.status(200).json(products);
   } catch (err) {
     res.status(500).send({message: 'An error occurred retrieving category.'});
