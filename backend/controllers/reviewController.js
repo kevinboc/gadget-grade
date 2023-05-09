@@ -12,14 +12,23 @@ exports.addReview = async function(req, res) {
     }
 };
   
-exports.getProductReviews = async function(req, res) {
-    try {
-        const reviews = await Review.find({product: req.params.productId})
-        res.status(200).json(reviews);
-    } catch (err) {
-        res.status(500).send({message: 'An error occurred while getting the product reviews.'});
-    }
-}
+exports.getProductReviews = async function (req, res) {
+  try {
+      // Read sorting parameters from query string
+      const sortField = req.query.sort;
+      const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+      // Build the sort object
+      const sortObject = {};
+      if (sortField) {
+          sortObject[sortField] = sortOrder;
+      }
+      // Find and sort the reviews
+      const reviews = await Review.find({ product: req.params.productId }).sort(sortObject);
+      res.status(200).json(reviews);
+  } catch (err) {
+      res.status(500).send({ message: 'An error occurred while getting the product reviews.' });
+  }
+};
 
 exports.getUserReviews = async function(req, res) {
     try {
