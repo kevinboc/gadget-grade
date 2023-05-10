@@ -28,6 +28,10 @@ const productSchema = new mongoose.Schema({
     reviewCount: {
         type: Number,
         require: true
+    },
+    image: {
+        type: String,
+        required: true
     }
 });
 
