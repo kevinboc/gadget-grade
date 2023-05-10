@@ -3,7 +3,7 @@ import {ReactComponent as Logo} from "../assets/logo.svg"
 const Footer = () => {
   return (
     <div>
-        <footer className="flex flex-col items-center justify-center h-[30vh] bg-backgroundColor text-white text-center font-sans text-xs md:text-sm mt-10">
+        <footer className="flex flex-col items-center justify-center h-[30vh] bg-backgroundColor text-white text-center font-sans text-xs md:text-sm">
             {/* Logo */}
             <a href="/"><Logo className="h-[25px] md:h-[40px] w-auto" /></a>
             {/* Copyright */}

@@ -4,9 +4,11 @@ import Footer from "./layouts/Footer.jsx"
 
 const App = () => {
   return (
-    <div>
-      <Header />
-      <AppRoutes />
+    <div className="flex flex-col min-h-screen justify-between">
+      <div>
+        <Header />
+        <AppRoutes />
+      </div>
       <Footer />
     </div>
   )
