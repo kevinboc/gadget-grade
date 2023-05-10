@@ -12,7 +12,9 @@ export default {
         buttonColor: "#46C263",
       },
       gridAutoColumns: {
-        'mobile': 'min(40%)',
+        'mobileTrending': 'min(30%)',
+        'largeMobileActivity': 'min(40%)',
+        'mobileActivity': 'min(60%)',
       }
     },
   },
