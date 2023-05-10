@@ -5,29 +5,24 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    productID: {
-        type: Number,
-        required: true
-    },
     description: {
         type: String,
         required: true
     },
     rating: {
         type: Number,
-        required: true
+        default: 0
     },
-    category: {
-        type: String,
-        required: true
-    },
+    categories: [{
+        type: String
+    }],
     ratingCount: {
         type: Number,
-        required: true
+        default: 0
     },
     reviewCount: {
         type: Number,
-        require: true
+        default: 0
     },
     image: {
         type: String,
