@@ -1,6 +1,7 @@
 var mongoose = require('mongoose'),
 Review = mongoose.model('Review');
 Product = mongoose.model('Product');
+User = mongoose.model('User');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.addReview = async function(req, res) {
@@ -52,7 +53,11 @@ exports.getUserReviews = async function(req, res) {
 
 exports.getRecentReviews = async function(req, res) {
     try {
-        const reviews = await Review.find({}).sort({timeStamp: -1}).limit(10);
+        const reviews = await Review.find({})
+        .populate('author')
+        .populate('product')
+        .sort({timeStamp: -1})
+        .limit(10);
         res.status(200).json(reviews);
     } catch (err) {
         res.status(500).send({message: 'An error occurred while getting the user reviews.'});
