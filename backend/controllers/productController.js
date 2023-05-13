@@ -104,7 +104,7 @@ async function getTrendingProducts() {
     // sort by review count in descending order
     {$sort: {count: -1}},
     // limit the result to 5 products
-    {$limit: 5} 
+    {$limit: 5},
   ]);
   // get the product IDs from the aggregation result
   const productIds = recentReviews.map(review => review._id);
