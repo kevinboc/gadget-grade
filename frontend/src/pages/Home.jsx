@@ -52,7 +52,7 @@ const Home = () => {
               {trendingProducts.map(trendingProduct => (
                 <div key={recent._id} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                <img src={Product} alt="" className=""/>
+                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
                 <p className="text-center text-xs sm:text-sm md:text-base font-sans">{trendingProduct.name}</p>
               </div>
