@@ -21,40 +21,45 @@ const Home = () => {
             {/* Title */}
             <p className="text-center text-white font-normal bg-backgroundColor p-5">Trending Products</p>
             {/* Products Grid */}
-            <div className="grid grid-flow-col py-5 auto-cols-mobileTrending overflow-x-auto h-auto mx-3 gap-x-10 md:gap-0 md:py-0 md:grid-cols-5">
+            <div className="grid grid-flow-col py-5 auto-cols-mobileTrending overflow-x-auto mx-3 gap-x-auto md:gap-0 md:py-0 md:grid-cols-5">
               {/* Product */}
               <div className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                <img src={Product} alt="" className=""/>
+                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
                 <p className="text-center text-xs sm:text-sm md:text-base font-sans">Apple IPhone 14 Pro</p>
+                {/* Product Rating + (# of rating) */}
+                <div className="flex flex-row items-center mx-auto">
+                  <p>*****</p>
+                  <p className="text-center text-xs sm:text-sm md:text-base font-sans">(10000)</p>
+                </div>
               </div>
 
               {/* Test */}
               <div className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                <img src={Product} alt="" className=""/>
+                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
                 <p className="text-center text-xs sm:text-sm md:text-base font-sans">Apple IPhone 14 Pro</p>
               </div>
 
               <div className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                  <img src={Product} alt="" className=""/>
+                  <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                   {/* Product Title */}
                   <p className="text-center text-xs sm:text-sm md:text-base font-sans">Apple IPhone 14 Pro</p>
               </div>
 
               <div className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                <img src={Product} alt="" className=""/>
+                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
                 <p className="text-center text-xs sm:text-sm md:text-base font-sans">Apple IPhone 14 Pro</p>
               </div>
 
               <div className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
-                <img src={Product} alt="" className=""/>
+                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
                 <p className="text-center text-xs sm:text-sm md:text-base font-sans">Apple IPhone 14 Pro</p>
               </div>
@@ -80,7 +85,7 @@ const Home = () => {
           {/* Recent Activity Title */}
           <p className="text-center md:text-white font-sans py-5 md:bg-backgroundColor"> Recent Activity</p>
           {/* Recent Activity Grid */}
-          <div className="grid grid-flow-col auto-cols-mobileActivity overflow-x-auto gap-x-10 mx-3 pb-5 md:pb-0 md:mx-0 md:mt-[2%] sm:auto-cols-largeMobileActivity lg:grid-flow-row lg:grid-cols-5 lg:gap-10">
+          <div className="grid grid-flow-col auto-cols-mobileActivity overflow-x-auto gap-x-10 mx-3 pb-5 md:pb-0 md:mx-0 md:mt-[2%] sm:auto-cols-largeMobileActivity lg:grid-flow-row lg:grid-cols-4 xl:grid-cols-5 lg:gap-10">
             {/* Recent Activity */}
             <div className="flex flex-col border border-solid border-borderColor rounded-md p-5 gap-y-2">
               {/* Title */}
