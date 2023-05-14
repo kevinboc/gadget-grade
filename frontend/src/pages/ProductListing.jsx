@@ -1,13 +1,12 @@
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
 import { BiFilter } from "react-icons/bi"
-import { BsStarFill, BsStarHalf } from "react-icons/bs"
 import Product from "../assets/IPhone_14_Pro.jpg"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from '../components/StarRating';
-
+import Navbar from "../layouts/Navbar.jsx"
 
 const ProductListing = () => {
 
@@ -18,13 +17,14 @@ const ProductListing = () => {
   }
 
   const { item } = useParams();
+  const {path} = useParams();
 
   const [items, setItems] = useState([]);
 
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:3500/product/category/'+item);
+        const response = await axios.get('http://localhost:3500/product/'+path+'/'+item);
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching recent activities", error);
@@ -35,7 +35,9 @@ const ProductListing = () => {
 
   }, []);
   return (
-    <div className="mx-2 md:mx-5">
+    <div>
+      <Navbar/>
+      <div className="mx-2 md:mx-5">
       <div className="flex flex-row justify-between items-center p-2 border-b-[1px] border-solid border-borderColor h-[7vh]">
         {/* Results */}
         <p className="font-sans text-sm text-center">{items.length} Results</p>
@@ -75,6 +77,7 @@ const ProductListing = () => {
           </div>
       ))}        
       </div>
+    </div>
     </div>
   )
 }
