@@ -50,7 +50,7 @@ const Home = () => {
             {/* Products Grid */}
             <div className="grid grid-flow-col py-5 auto-cols-mobileTrending overflow-x-auto h-auto mx-3 gap-x-10 md:gap-0 md:py-0 md:grid-cols-5">
               {trendingProducts.map(trendingProduct => (
-                <div key={recent._id} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
+                <div key={trendingProduct._id} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
                 {/* Product Image */}
                 <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
                 {/* Product Title */}
