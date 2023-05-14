@@ -37,12 +37,19 @@ exports.getCategory = async function(req,res) {
     if (sortField) {
         sortObject[sortField] = sortOrder;
     }
-    const products = await   Product.find({categories: {$in: req.params.category}}).sort(sortObject);
+
+    // Assume categories is a comma-separated list in the URL
+    const categories = req.params.category.split('-');
+    const categoryRegexes = categories.map(category => new RegExp(`^${category}$`, 'i'));
+    
+    const products = await Product.find({categories: {$in: categoryRegexes}}).sort(sortObject);
     res.status(200).json(products);
   } catch (err) {
     res.status(500).send({message: 'An error occurred retrieving category.'});
   }
-}
+};
+
+
 
 exports.getProduct = async function(req, res) {
   try {
