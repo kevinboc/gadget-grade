@@ -25,11 +25,11 @@ const userSchema = new mongoose.Schema({
     },
     active: {
         type: Boolean,
-        required: true
+        default: true
     },
     image: {
         type: String,
-        required: true
+        default: "na"
     }
 });
 

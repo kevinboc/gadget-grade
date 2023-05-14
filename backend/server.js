@@ -14,7 +14,7 @@ console.log(process.env.NODE_ENV);
 
 app.use(logger);
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 
