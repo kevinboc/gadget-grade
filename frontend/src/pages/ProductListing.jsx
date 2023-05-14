@@ -3,7 +3,7 @@ import { BiFilter } from "react-icons/bi"
 import Product from "../assets/IPhone_14_Pro.jpg"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import StarRating from '../components/StarRating';
 import Navbar from "../layouts/Navbar.jsx"
@@ -33,7 +33,7 @@ const ProductListing = () => {
 
   fetchItems();
 
-  }, []);
+  }, [item, path]);
   return (
     <div>
       <Navbar/>

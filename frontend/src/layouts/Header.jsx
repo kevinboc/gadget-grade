@@ -2,12 +2,10 @@ import { useState } from "react";
 import SideMenu from "./SideMenu";
 import { AiOutlineMenu, AiOutlineSearch } from "react-icons/ai";
 import {ReactComponent as Logo} from "../assets/logo.svg";
-import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [nav, setNav] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
 
   const handleSearch = () => {
     window.location.href = `/product-listing/search/${searchTerm}`;
