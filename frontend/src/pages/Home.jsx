@@ -1,7 +1,7 @@
 import Navbar from "../layouts/Navbar.jsx"
 import Hero from "../assets/hero.jpg"
 import Product from "../assets/IPhone_14_Pro.jpg"
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Home = () => {
@@ -51,11 +51,11 @@ const Home = () => {
             <div className="grid grid-flow-col py-5 auto-cols-mobileTrending overflow-x-auto h-auto mx-3 gap-x-10 md:gap-0 md:py-0 md:grid-cols-5">
               {trendingProducts.map(trendingProduct => (
                 <div key={trendingProduct._id} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
-                {/* Product Image */}
-                <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
-                {/* Product Title */}
-                <p className="text-center text-xs sm:text-sm md:text-base font-sans">{trendingProduct.name}</p>
-              </div>
+                  {/* Product Image */}
+                  <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
+                  {/* Product Title */}
+                  <p className="text-center text-xs sm:text-sm md:text-base font-sans">{trendingProduct.name}</p>
+                </div>
               ))}
           </div>
           </div>
