@@ -1,7 +1,14 @@
 import React from 'react';
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs"; // import the star icons
+import PropTypes from "prop-types"
 
 const StarRating = ({rating}) => {
+
+  // Validating props
+  StarRating.propTypes = {
+    rating: PropTypes.number
+  } 
+
   // determine the value of the filled stars, half stars, and empty stars
   const fullStars = Math.floor(rating);
   const halfStars = Math.ceil(rating - fullStars);
