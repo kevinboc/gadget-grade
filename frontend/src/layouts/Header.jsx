@@ -30,7 +30,7 @@ const Header = () => {
             onClick={handleSearch}
           />
           <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN</a>
-          <a href="/login" className="font-sans font-bold text-base text-white pl-2 hidden md:flex mt-auto mb-auto">SIGN UP</a>
+          <a href="/sign-up" className="font-sans font-bold text-base text-white pl-2 hidden md:flex mt-auto mb-auto">SIGN UP</a>
         </div>
       </header>
 

@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
 
     fetchItem()
     fetchItemReviews()
-  }, []);
+  }, [id]);
 
   const getImage = async (filename) => 
   {

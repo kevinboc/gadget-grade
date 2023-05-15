@@ -23,7 +23,7 @@ const Home = () => {
         const response = await axios.get('http://localhost:3500/product/trending');
         setTrendingProducts(response.data);
       } catch (error) {
-        console.error("Error fetching recent activities", error);
+        console.error("Error fetching trending activities", error);
       }
     }
 

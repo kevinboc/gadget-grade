@@ -28,7 +28,7 @@ const ProductListing = () => {
       }
     }
   fetchItems();
-  }, []);
+  }, [item, path]);
 
   const fetchItemsByQuery = async (sort, order) => {
     try {
