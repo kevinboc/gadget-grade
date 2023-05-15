@@ -3,6 +3,7 @@ import Home from "../pages/Home"
 import ProductListing from "../pages/ProductListing"
 import Login from "../pages/Login"
 import Product from "../pages/Product"
+import UserProfile from "../pages/userProfile"
 
 const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
           <Route path="/product-listing/:path/:item" element={<ProductListing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/product" element={<Product />}/>
+          <Route path="/userProfile" element={<UserProfile />}/>
         </Routes>
   </BrowserRouter>
   )
