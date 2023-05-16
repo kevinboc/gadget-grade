@@ -12,9 +12,14 @@ const Header = () => {
   }
 
   const handleProfile = () => {
-    const user = sessionStorage.getItem("user");
-    window.location.href = `/userProfile/${user._Id}`;
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    window.location.href = `/user/${user._id}`;
   }
+  
+  const handleSignOut = () => {
+    sessionStorage.removeItem("user");
+    window.location.href = "/login";
+};
 
   return (
     <div>
@@ -35,10 +40,13 @@ const Header = () => {
             onClick={handleSearch}
           />
           {sessionStorage.getItem("user") ? (
-            <p className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleProfile}>PROFILE</p>
-          ) : (
-            <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN / SIGN UP</a>
-          )}
+                <>
+                    <p className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleProfile}>{JSON.parse(sessionStorage.getItem("user")).username}</p>
+                    <button className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleSignOut}>Sign Out</button>
+                </>
+            ) : (
+                <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN / SIGN UP</a>
+            )}
         </div>
       </header>
 
