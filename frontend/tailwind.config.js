@@ -13,8 +13,8 @@ export default {
       },
       gridAutoColumns: {
         'mobileTrending': 'min(30%)',
-        'largeMobileActivity': 'min(40%)',
-        'mobileActivity': 'min(60%)',
+        'largeMobileActivity': 'min(30%)',
+        'mobileActivity': 'min(50%)',
       }
     },
   },
