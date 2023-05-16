@@ -1,6 +1,8 @@
 var mongoose = require('mongoose'),
 User = mongoose.model('User');
 var ObjectID = require('mongodb').ObjectID;
+const bcrypt = require('bcrypt');
+
 
 exports.addUser = async function(req, res) {
     var newUser = new User(req.body);
@@ -58,7 +60,7 @@ exports.verifyLogin = async function(req,res) {
       res.status(404).send({message: 'User not found.'});
     }
   } catch (err) {
-    res.status(500).send({message: 'An error occurred retrieving category.'});
+    res.status(500).send({message: 'An error occurred.'});
   }
 }
 
