@@ -27,6 +27,23 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         required: true
     },
+    reviews: {
+        type: Number,
+        default: 0
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    timeStamp: {
+        type: Date,
+        default: Date.now,
+        required: true
+    },
+    location: {
+        type: String,
+        default: 'Earth'
+    },
     image: {
         type: String,
         required: true
