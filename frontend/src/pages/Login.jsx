@@ -21,8 +21,8 @@ const LoginPage = () => {
           password: password,
         });
         // handle response data as needed
-        console.log(response.data);
-        console.log("Logging in:", { username, password });
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        window.location.href = "http://localhost:3000"
       } catch (err) {
         alert("Invalid Login");
       }
@@ -39,11 +39,11 @@ const LoginPage = () => {
           lastName: lastName,
           email: email,
         });
-        console.log(response.data);
+        sessionStorage.setItem("user", JSON.stringify(response.data));
+        window.location.href = "http://localhost:3000"
         } catch (error) {
           console.error('Error:', error);
         }
-        console.log("Signing up:", { username, password, firstName, lastName, email });
       }
     }
   };

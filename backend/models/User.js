@@ -29,7 +29,9 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: "na"
+        default: function () {
+            return this._id.toString()
+        }
     }
 });
 

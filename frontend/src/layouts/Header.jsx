@@ -16,8 +16,7 @@ const Header = () => {
         <input type="text" placeholder="Search Gadget" key="" className="flex-auto mt-auto mb-auto mx-4 px-4 h-[25px] md:h-[40px] hidden md:flex" />
         <div className="flex mt-auto mb-auto">
           <AiOutlineSearch className="text-white h-[25px] md:h-[40px] w-auto pr-2" />
-          <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN</a>
-          <a href="/login" className="font-sans font-bold text-base text-white pl-2 hidden md:flex mt-auto mb-auto">SIGN UP</a>
+          <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN s/ SIGN UP</a>
         </div>
       </header>
 
