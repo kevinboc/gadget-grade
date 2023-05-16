@@ -11,6 +11,11 @@ const Header = () => {
     window.location.href = `/product-listing/search/${searchTerm}`;
   }
 
+  const handleProfile = () => {
+    const user = sessionStorage.getItem("user");
+    window.location.href = `/userProfile/${user._Id}`;
+  }
+
   return (
     <div>
       <header className="bg-backgroundColor h-[10vh] flex flex-row justify-between items-start px-2 md:px-5">
@@ -29,8 +34,11 @@ const Header = () => {
             className="text-white h-[25px] md:h-[40px] w-auto pr-2"
             onClick={handleSearch}
           />
-          <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN / SIGN UP</a>
-          <a href="/login" className="font-sans font-bold text-base text-white pl-2 hidden md:flex mt-auto mb-auto">SIGN UP</a>
+          {sessionStorage.getItem("user") ? (
+            <p className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleProfile}>PROFILE</p>
+          ) : (
+            <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN / SIGN UP</a>
+          )}
         </div>
       </header>
 
