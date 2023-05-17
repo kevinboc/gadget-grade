@@ -39,7 +39,18 @@ const reviewSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
         required: true
+    },
+    usersLiked: {
+        type: [String],
+        unique: true,
+        default: []
+    },
+    usersDisliked: {
+        type: [String],
+        unique: true,
+        default: []
     }
+        
 });
 
 module.exports = mongoose.model('Review', reviewSchema);
