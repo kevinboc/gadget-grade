@@ -12,12 +12,16 @@ exports.addReview = async function(req, res) {
       const savedReview = await newReview.save();
       // get product associated with review
       const product = await Product.findById(req.body.product);
+      //get user
+      const author = await User.findById(req.body.author);
       // calculate new product rating
       product.reviewCount++;
       product.ratingCount =  Number(product.ratingCount) + Number(req.body.rating);
       product.rating = Number(product.ratingCount / product.reviewCount).toFixed(1);
-      // update product in db
       const updatedProduct = await Product.findByIdAndUpdate(req.body.product, product, {new:true});
+      author.reviews++;
+      const updatedUser = await User.findByIdAndUpdate(req.body.author, author, {new:true})
+      // update product in db
       res.status(201).json(savedReview);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while adding the review.'});
