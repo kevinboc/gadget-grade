@@ -5,7 +5,8 @@ const saltRounds = 10;
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
@@ -21,7 +22,15 @@ const userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true,
+        validate: {
+            validator: function (email) {
+                const emailRegex = /^\S+@\S+\.\S+$/;
+                return emailRegex.test(email);
+            },
+            message: 'Invalid email format'
+        }
     },
     active: {
         type: Boolean,
@@ -29,11 +38,13 @@ const userSchema = new mongoose.Schema({
     },
     reviews: {
         type: Number,
-        default: 0
+        default: 0,
+        min: 0
     },
     description: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 250
     },
     timeStamp: {
         type: Date,

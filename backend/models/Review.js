@@ -4,7 +4,14 @@ const reviewSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
+        validate: {
+            validator: async function (value) {
+                const user = await mongoose.model('User').findById(value);
+                return user !== null;
+            },
+            message: 'Invalid author'
+        }
     },
     title: {
         type: String,
@@ -12,7 +19,8 @@ const reviewSchema = new mongoose.Schema({
     },
     body: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 500
     },
     timeStamp: {
         type: Date,
@@ -38,7 +46,14 @@ const reviewSchema = new mongoose.Schema({
     product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
-        required: true
+        required: true,
+        validate: {
+            validator: async function (value) {
+                const product = await mongoose.model('Product').findById(value);
+                return product !== null;
+            },
+            message: 'Invalid product'
+        }
     }
 });
 
