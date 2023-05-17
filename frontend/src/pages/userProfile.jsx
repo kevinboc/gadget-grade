@@ -83,12 +83,12 @@ const userProfile = () => {
 
                     <div className="flex ">
                         <div className="w-1/2">
-                            <h1 className="font-bold mt-2">First Name: </h1>
+                            <h1 className="font-bold mt-1">First Name: </h1>
                             <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.firstName}</p>
                         </div>
                     
                         <div className="flex-col w-1/2">
-                            <h1 className="font-bold mt-2">Last Name: </h1>
+                            <h1 className="font-bold mt-1">Last Name: </h1>
                             <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.lastName}</p>
                         </div>
                     </div>
