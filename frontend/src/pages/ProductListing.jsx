@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import StarRating from '../components/StarRating';
+import StarDisplay from "../components/StarDisplay"
 import Navbar from "../layouts/Navbar.jsx"
 
 const ProductListing = () => {
@@ -111,7 +111,7 @@ const ProductListing = () => {
           <p className="text-center text-sm">{item.name}</p>
           {/* Average Rating + (# of ratings) */}
           <div className="flex flex-row items-center justify-center h-fit">
-              <StarRating rating={item.rating} />
+              <StarDisplay rating={item.rating} />
             <div>
               <p className="text-sm">({item.reviewCount})</p>
             </div>
