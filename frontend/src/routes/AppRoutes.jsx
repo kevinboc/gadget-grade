@@ -4,6 +4,7 @@ import ProductListing from "../pages/ProductListing"
 import Login from "../pages/Login"
 import Product from "../pages/Product"
 import UserProfile from "../pages/userProfile"
+import ReviewPage from "../pages/ReviewPage"
 
 const AppRoutes = () => {
   return (
@@ -14,6 +15,8 @@ const AppRoutes = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/product/:id" element={<Product />}/>
           <Route path="/user/:id" element={<UserProfile />}/>
+          <Route path="/review/:id" element={<ReviewPage />}/>
+
         </Routes>
   </BrowserRouter>
   )

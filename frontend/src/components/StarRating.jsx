@@ -1,25 +1,26 @@
-import React from 'react';
-import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs"; // import the star icons
+import React, { useState } from 'react';
+import { BsStarFill, BsStar } from "react-icons/bs"; // import the star icons
 import PropTypes from "prop-types"
 
-const StarRating = ({rating}) => {
-
-  // Validating props
+const StarRating = ({ onRatingChange }) => {
   StarRating.propTypes = {
-    rating: PropTypes.number
+    onRatingChange: PropTypes.func,
   } 
 
-  // determine the value of the filled stars, half stars, and empty stars
-  const fullStars = Math.floor(rating);
-  const halfStars = Math.ceil(rating - fullStars);
-  const emptyStars = 5 - fullStars - halfStars;
-  
-  // generate the stars
-  const stars = [
-    ...Array(fullStars).fill(<BsStarFill />),
-    ...Array(halfStars).fill(<BsStarHalf />),
-    ...Array(emptyStars).fill(<BsStar />)
-  ];
+  const [localRating, setLocalRating] = useState(0);
+
+  const handleStarClick = (star) => {
+    setLocalRating(star);
+    onRatingChange(star);
+  };
+
+  const stars = Array(5).fill(0).map((_, i) => {
+    if (i < localRating) {
+      return <BsStarFill onClick={() => handleStarClick(i + 1)} />;
+    } else {
+      return <BsStar onClick={() => handleStarClick(i + 1)} />;
+    }
+  });
 
   return (
     <div style={{display: 'flex'}}>
