@@ -1,11 +1,11 @@
 import Hero from "../assets/hero.jpg"
 import Navbar from "../layouts/Navbar.jsx"
 import { useState, useEffect  } from "react"
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import StarDisplay from "../components/StarDisplay";
 
-const userProfile = () => {
+const UserProfile = () => {
     const { id } = useParams();
     const [profile, setProfile] = useState({});
     const [reviews, setReviews] = useState([]);
@@ -171,4 +171,4 @@ const userProfile = () => {
     )
 }
 
-export default userProfile
+export default UserProfile

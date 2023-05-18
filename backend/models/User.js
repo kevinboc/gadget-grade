@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const uniqueValidator = require('mongoose-unique-validator');
 const saltRounds = 10;
 
 const userSchema = new mongoose.Schema({
@@ -43,7 +44,7 @@ const userSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        required: true,
+        default: '',
         maxlength: 250
     },
     timeStamp: {
@@ -62,6 +63,8 @@ const userSchema = new mongoose.Schema({
         }
     }
 });
+
+userSchema.plugin(uniqueValidator);
 
 userSchema.pre('save', async function (next) {
     if (this.isModified('password') || this.isNew) {
