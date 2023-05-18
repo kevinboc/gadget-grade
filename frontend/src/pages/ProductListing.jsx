@@ -28,7 +28,7 @@ const ProductListing = () => {
       }
     }
   fetchItems();
-  }, []);
+  }, [item, path]);
 
   const fetchItemsByQuery = async (sort, order) => {
     try {
@@ -87,10 +87,20 @@ const ProductListing = () => {
             
 
             {/* Rating */}
-            {/* Ascending */}
-            <button className="bg-backgroundColor text-white font-sans font-bold sm:w-1/4 mx-auto p-4 rounded-md" onClick={() => setUtilMenu(false)}>Best Ratings</button>
-            {/* Descending */}
-            <button className="bg-backgroundColor text-white font-sans font-bold sm:w-1/4 mx-auto p-4 rounded-md" onClick={() => setUtilMenu(false)}>Worst Ratings</button>
+            {/* Best = descending */}
+            <button className="bg-backgroundColor text-white font-sans font-bold sm:w-1/4 mx-auto p-4 rounded-md" onClick={() => {
+              fetchItemsByQuery("rating", "desc");
+              setUtilMenu(false)
+            }}>
+              Best Ratings
+            </button>
+            {/* Worst = Ascending */}
+            <button className="bg-backgroundColor text-white font-sans font-bold sm:w-1/4 mx-auto p-4 rounded-md" onClick={() => {
+              fetchItemsByQuery("rating", "asc");
+              setUtilMenu(false)
+            }}>
+              Worst Ratings
+            </button>
           </div>
         </div>
       ) : (
