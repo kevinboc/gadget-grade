@@ -59,7 +59,7 @@ const ProductDetailPage = () => {
         review.usersLiked.push(user)
         review.like++
         const response = await axios.put(`http://localhost:3500/review/${review._id}`, { 
-          like: review,
+          like: review.like,
           usersLiked: review.usersLiked
         });
         setReviews(reviews.map(r => r._id === review._id ? {...r, like: response.data.like, usersLiked: response.data.usersLiked} : r));
