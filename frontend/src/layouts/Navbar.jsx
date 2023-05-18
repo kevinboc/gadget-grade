@@ -74,16 +74,22 @@ const Navbar = () => {
             </li>
             <li className="relative inline-block mt-auto mb-auto list-none font-sans font-semibold text-m">
               <div className="flex flex-row peer/tv">
-                <a href="/product-listing/category/tv" >TV & Home Theater</a>
+                <a href="/product-listing/category/tv-hometheater" >TV & Home Theater</a>
                 <RiArrowDropDownLine size={20} className="my-auto" />
               </div>
               <div className="invisible peer-hover/tv:visible hover:visible absolute bg-white min-w-full w-auto z-10 p-2 flex flex-col">
+                  <div className="flex flex-row justify-between items-center border-y-[1px] border-solid border-borderColor">
+                    <a href="/product-listing/category/tv" className="font-normal hover:underline">TV</a>
+                  </div>
                   <a href="/product-listing/category/tv-samsung" className="font-normal hover:underline">Samsung</a>
                   <a href="/product-listing/category/tv-lg" className="font-normal hover:underline">LG</a>
                   <a href="/product-listing/category/tv-sony" className="font-normal hover:underline">Sony</a>
                   <a href="/product-listing/category/tv-vizio" className="font-normal hover:underline">VIZIO</a>
                   <a href="/product-listing/category/tv-insignia" className="font-normal hover:underline">Insignia</a>
                   <a href="/product-listing/category/tv-hisene" className="font-normal hover:underline">Hisene</a>
+                  <div className="flex flex-row justify-between items-center border-y-[1px] border-solid border-borderColor">
+                    <a href="/product-listing/category/hometheather" className="font-normal hover:underline">Home Theater</a>
+                  </div>
               </div>
             </li>
         </nav>

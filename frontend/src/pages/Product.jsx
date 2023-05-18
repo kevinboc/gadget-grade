@@ -30,7 +30,7 @@ const ProductDetailPage = () => {
 
     fetchItem()
     fetchItemReviews()
-  }, []);
+  }, [id]);
 
   const handleReviewButton = () => {
     if(sessionStorage.getItem("user")) {
@@ -40,6 +40,10 @@ const ProductDetailPage = () => {
     }
   }
 
+  const getImageURL = (review) => {
+    console.log(review.author)
+    return "/users/" +  review.author + ".jpg"
+  }
   const handleLike = async (review) => {
     try {
       const user = sessionStorage.getItem('user');
@@ -97,7 +101,6 @@ const ProductDetailPage = () => {
       console.error("Error liking review", error);
     }
   }
-  
 
   return (
     <div>
@@ -121,50 +124,52 @@ const ProductDetailPage = () => {
       <div className="mt-[20px]">
         <h4 className="font-bold">Reviews:</h4>
         <div className="h-[500px] overflow-y-auto">
-        {reviews.map(review => (
-          <div key={review._id} className="flex items-start justify-between bg-white p-6 rounded-lg shadow-md mb-4">
-            {/* Left Container */}
-            <div className="flex">
-              {/* User Container */}
-              {/* User Profile Picture */}
-              <img src="" alt="" className="w-20 h-20 rounded-full mr-4"/>
-              {/* Review Body */}
-              <div>
-                <p className="text-lg text-gray-700">{review.body}</p>
+          {
+            reviews.map(review => (
+              <div key={review._id} className="flex items-start justify-between bg-white p-6 rounded-lg shadow-md mb-4">
+                {/* Left Container */}
+                <div className="flex">
+                  {/* User Container */}
+                  {/* User Profile Picture */}
+                  <img src={getImageURL(review)} alt="" className="w-20 h-20 rounded-full mr-4" />
+                  {/* Review Body */}
+                  <div>
+                    <p className="text-lg text-gray-700">{review.body}</p>
+                  </div>
+                </div>
+    
+                {/* Right Container */}
+                <div className="flex flex-col items-start justify-between ml-4">
+                  {/* Star Ratings */}
+                  <div className="mb-2">
+                    <StarDisplay rating={review.rating} />
+                  </div>
+    
+                  {/* Button Container */}
+                  <div className="flex space-x-2">
+                    {/* Like */}
+                    <button 
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
+                      onClick={() => handleLike(review)}
+                      disabled={review.usersLiked.includes(sessionStorage.getItem('user')) || !sessionStorage.getItem('user')}
+                    >
+                      Like {review.likes}
+                    </button>
+                    <span className="px-3 py-1 text-blue-500 font-bold">{review.like}</span>
+                    {/* Dislike */}
+                    <button 
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
+                      onClick={() => handleDislike(review)}
+                      disabled={review.usersDisliked.includes(sessionStorage.getItem('user')) || !sessionStorage.getItem('user')}
+                    >
+                      Dislike {review.dislikes}
+                    </button>
+                    <span className="px-3 py-1 text-red-500 font-bold">{review.dislike}</span>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            {/* Right Container */}
-            <div className="flex flex-col items-start justify-between ml-4">
-              {/* Star Ratings */}
-              <div className="mb-2">
-                <StarDisplay rating={review.rating} />
-              </div>
-
-              {/* Button Container */}
-              <div className="flex space-x-2">
-                {/* Like */}
-                <button 
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700"
-                  onClick={() => handleLike(review)}
-                  disabled={review.usersLiked.includes(sessionStorage.getItem('user')) || !sessionStorage.getItem('user')}
-                >
-                  Like {review.likes}
-                </button>
-                <span className="px-3 py-1 text-blue-500 font-bold">{review.like}</span>
-                {/* Dislike */}
-                <button 
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700"
-                  onClick={() => handleDislike(review)}
-                  disabled={review.usersDisliked.includes(sessionStorage.getItem('user')) || !sessionStorage.getItem('user')}
-                >
-                  Dislike {review.dislikes}
-                </button>
-                <span className="px-3 py-1 text-red-500 font-bold">{review.dislike}</span>
-              </div>
-            </div>
-          </div>
-        ))}
+            ))
+          }
         </div>
       </div>
     </div>
