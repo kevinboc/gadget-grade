@@ -22,6 +22,7 @@ exports.getAllProducts = async function(req, res) {
           sortObject[sortField] = sortOrder;
       }
       const products = await Product.find({}).sort(sortObject);
+      console.log(JSON.stringify(products))
       res.status(200).json(products);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while retrieving the products.'});
