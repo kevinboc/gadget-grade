@@ -1,5 +1,4 @@
 import { AiOutlineArrowDown, AiOutlineArrowUp } from "react-icons/ai"
-import Product from "../assets/IPhone_14_Pro.jpg"
 import { useNavigate } from "react-router-dom"
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
@@ -21,7 +20,10 @@ const ProductListing = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const response = await axios.get('http://localhost:3500/product/'+path+'/'+item);
+        let response = await axios.get('http://localhost:3500/product/'+path+'/'+item)
+        if(item === "all") {
+          response = await axios.get('http://localhost:3500/product/')
+        }
         setItems(response.data);
       } catch (error) {
         console.error("Error fetching items", error);
@@ -41,6 +43,10 @@ const ProductListing = () => {
     } catch (error) {
       console.error("Error fetching items by name sort", error)
     }
+  }
+
+  const getProductImageURL = (product) => {
+    return "/products/" +  product + ".jpg"
   }
 
   return (
@@ -110,12 +116,12 @@ const ProductListing = () => {
       {/* Product Grid Container */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 h-fit gap-5 my-5">
       {items.map(item => (
-          <div key={item._id} className="border border-solid border-borderColor rounded-md" onClick={() => {
+          <div key={item._id} className="border border-solid border-borderColor rounded-md shadow-[0_0_10px_0_rgba(0,0,0,0.1)]" onClick={() => {
             navigate("/product/"+item._id)
           }}>
           {/* Image */}
           <div className="border-b-[1px] border-solid border-borderColor p-2">
-            <img src={Product} alt="" className="h-auto w-1/2 mx-auto" />
+            <img src={getProductImageURL(item._id)} alt="" className="h-[200px] w-auto mx-auto" />
           </div>
           {/* Title */}
           <p className="text-center text-sm">{item.name}</p>

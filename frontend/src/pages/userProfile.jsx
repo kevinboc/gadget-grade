@@ -1,4 +1,3 @@
-import Hero from "../assets/hero.jpg"
 import Navbar from "../layouts/Navbar.jsx"
 import { useState, useEffect  } from "react"
 import { useParams } from "react-router-dom";
@@ -12,7 +11,6 @@ const UserProfile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [newDescription, setNewDescription] = useState('');
     const [error, setError] = useState(null);
-
     useEffect(() => {
         const fetchProfile = async () => {
           try {
@@ -36,7 +34,7 @@ const UserProfile = () => {
     
         fetchProfile()
         fetchUserReviews()
-      }, []);
+      }, [id]);
 
     const handleEditClick = () => {
         setIsEditing(!isEditing);
@@ -65,108 +63,137 @@ const UserProfile = () => {
         }
     }
 
+    const getUserImageURL = (user) => {
+        return "/users/" +  user + ".jpg"
+      }
+
+    const getProductImageURL = (product) => {
+        return "/products/" +  product + ".jpg"
+      }
+
     return (
         <div>
             <Navbar/>
-            <div className="flex h-screen ml-[1%]">
-            <div className ="ml-[2%] mt-[2%] flex-col w-1/4 mr-[3%]">
-                <div className="">
-                    <img src={Hero} alt="Hero Image" className="min-w-full " />
-                </div>
-
-                <div className="mt-[2%] flex bg-gray-200 rounded-lg shadow-md p-2">
-                    <h1 className="font-bold w-1/2">Reviews: {profile.reviews}</h1>
-                    <h1 className="font-bold">Verified: </h1>
-                </div>
-
-                <div className=" flex-col mt-[3%] bg-gray-200 bg-opacity-50 h-auto p-2 rounded-lg shadow-md">
-
-                    <div className="flex ">
-                        <div className="w-1/2">
-                            <h1 className="font-bold mt-1">First Name: </h1>
-                            <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.firstName}</p>
-                        </div>
-                    
-                        <div className="flex-col w-1/2">
-                            <h1 className="font-bold mt-1">Last Name: </h1>
-                            <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.lastName}</p>
-                        </div>
+            <div className="flex flex-row justify-between gap-x-5 h-screen w-auto m-[5%]">
+                {/* Left Container */}
+                <div className ="flex flex-col w-[20%] h-full">
+                    <div className="">
+                        <img src={getUserImageURL(id)} alt="Hero Image" className="rounded-md border-[4px] p-1 border-solid border-black w-full h-auto" />
                     </div>
 
-                    <div className="flex">
-                        <div className="flex-col w-1/2">
-                            <h1 className="font-bold mt-2">Location: </h1>
-                            <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.location}</p>
-                        </div>
-
-                        <div className="flex-col w-1/2">
-                            <h1 className="font-bold mt-2">Account Created: </h1>
-                            <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{new Date(profile.timeStamp).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</p>
-                        </div>
+                    <div className="mt-[2%] flex bg-gray-200 rounded-lg shadow-md p-2">
+                        <h1 className="font-bold w-1/2">Reviews: {profile.reviews}</h1>
+                        <h1 className="font-bold">Verified: </h1>
                     </div>
 
-                    <div className="flex-col mt-[2%] h-3/5">
-                        <h1 className="font-bold mt-2">User Description:</h1>
-                        {isEditing ? (
-                            <div>
-                                <textarea
-                                    className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto"
-                                    value={newDescription}
-                                    onChange={handleDescriptionChange}
-                                />
-                                {error && <p className="text-red-500">{error}</p>}
-                                <button 
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
-                                    onClick={handleDescriptionUpdate}
-                                >
-                                    Update
-                                </button>
-                                <button 
-                                    className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2"
-                                    onClick={handleEditClick}
-                                >
-                                    Cancel
-                                </button>
+                    <div className=" flex-col flex-1 mt-[3%] bg-gray-200 bg-opacity-50 h-auto p-2 rounded-lg shadow-md">
+
+                        <div className="flex ">
+                            <div className="w-1/2">
+                                <h1 className="font-bold mt-1">First Name: </h1>
+                                <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.firstName}</p>
                             </div>
-                        ) : (
-                            <div>
-                                <p className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto">{profile.description}</p>
-                                <button 
-                                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-2 "
-                                    onClick={handleEditClick}
-                                >
-                                    Edit
-                                </button>
+                        
+                            <div className="flex-col w-1/2">
+                                <h1 className="font-bold mt-1">Last Name: </h1>
+                                <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.lastName}</p>
                             </div>
-                        )}
+                        </div>
+
+                        <div className="flex">
+                            <div className="flex-col w-1/2">
+                                <h1 className="font-bold mt-2">Location: </h1>
+                                <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{profile.location}</p>
+                            </div>
+
+                            <div className="flex-col w-1/2">
+                                <h1 className="font-bold mt-2">Account Created: </h1>
+                                <p className="bg-gray-100 mt-1 p-1 rounded-lg shadow-md w-3/4">{new Date(profile.timeStamp).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric'})}</p>
+                            </div>
+                        </div>
+
+                        <div className="flex-col mt-[2%] h-3/5">
+                            <h1 className="font-bold mt-2">User Description:</h1>
+                            {isEditing && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                                <div>
+                                    <textarea
+                                        className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto"
+                                        value={newDescription}
+                                        onChange={handleDescriptionChange}
+                                    />
+                                    {error && <p className="text-red-500">{error}</p>}
+                                    <button 
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2"
+                                        onClick={handleDescriptionUpdate}
+                                    >
+                                        Update
+                                    </button>
+                                    <button 
+                                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2"
+                                        onClick={handleEditClick}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            ) : (
+                                <div>
+                                    <p className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto">{profile.description}</p>
+                                    {JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                                        <button 
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-2 "
+                                        onClick={handleEditClick}
+                                        >
+                                            Edit
+                                        </button>
+                                    ) : (
+                                        ""
+                                    )}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Right Container */}
+                <div className="w-[80%] h-full bg-gray-200 p-3 rounded-lg shadow-md">
+                    <h1 className="font-bold text-lg mb-2">Recent Activity:</h1>
+
+                    <div className="flex flex-col gap-y-5 overflow-auto">
+                        {reviews.map(review => (
+                            <div key={review._id} className="bg-white p-4 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)] overflow-hidden flex flex-row h-[25vh] gap-x-2">
+                                {/* Image */}
+                                <div className="">
+                                    <img src={getProductImageURL(review.product)} alt="" className="h-full w-auto p-2" />
+                                </div>
+
+                                {/* Title and Rating and Body Container */}
+                               <div className="flex flex-col flex-1 items-center p-2">
+                                    {/* Title and Rating Container */}
+                                    <div className="flex flex-row items-center w-full">
+                                        <h2 className="text-xl font-bold pr-2">{review.title}</h2>
+                                        <div>
+                                            <StarDisplay rating={review.rating}/>
+                                        </div>
+                                    </div>
+
+                                    <div className="w-full">
+                                        <p className="mb-3 text-gray-700">{review.body}</p>
+                                    </div>
+                               </div>
+
+                               {/* Stats Container */}
+                                <div className="flex flex-col justify-evenly items-center p-2">
+                                    <div>
+                                        <span className="mr-2">Likes: {review.like}</span>
+                                        <span>Dislikes: {review.dislike}</span>
+                                    </div>
+                                    <small className="text-gray-500">{new Date(review.timeStamp).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
-
-            <div className="w-2/3 h-4/5 bg-gray-200 p-3 rounded-lg shadow-md mt-[2%] mr-[2%]">
-                <div className="flex-col">
-                    <h1 className="font-bold text-lg mb-4">Recent Activity:</h1>
-                    {reviews.map(review => (
-                        <div key={review._id} className="bg-gray-100 p-4 rounded-lg shadow-md mt-4">
-                            <div className="flex justify-between items-center mb-2">
-                                <h2 className="text-xl font-bold">{review.title}</h2>
-                                <div>
-                                    <StarDisplay rating={review.rating}/>
-                                </div>
-                            </div>
-                            <p className="mb-3 text-gray-700">{review.body}</p>
-                            <div className="flex justify-between items-center mb-2">
-                                <div>
-                                    <span className="mr-2">Likes: {review.like}</span>
-                                    <span>Dislikes: {review.dislike}</span>
-                                </div>
-                                <small className="text-gray-500">{new Date(review.timeStamp).toLocaleString()}</small>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-        </div>
         </div>
     )
 }

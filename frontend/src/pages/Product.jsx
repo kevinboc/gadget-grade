@@ -40,10 +40,15 @@ const ProductDetailPage = () => {
     }
   }
 
-  const getImageURL = (review) => {
+  const getUserImageURL = (review) => {
     console.log(review.author)
     return "/users/" +  review.author + ".jpg"
   }
+
+  const getProductImageURL = () => {
+    return "/products/" +  id + ".jpg"
+  }
+
   const handleLike = async (review) => {
     try {
       const user = sessionStorage.getItem('user');
@@ -106,8 +111,10 @@ const ProductDetailPage = () => {
     <div>
       <Navbar />
       <div className="flex flex-col p-[20px] font-sans">
-      <div className="flex mb-[20px] rounded-[10px] overflow-hidden shadow-[0_0_10px_0_rgba(0,0,0,0.1)]">
-        <img className="object-cover w-[40%]" />
+      <div className="flex mb-[20px] rounded-[10px] overflow-hidden shadow-[0_0_10px_0_rgba(0,0,0,0.1)] h-[50vh] w-auto">
+        <div className="w-[40%] h-full">
+          <img src={getProductImageURL()} className="object-cover w-auto h-full mx-auto p-5" />
+        </div>
         <div className="p-[20px] w-[60%]">
           <h2 className="mb-[15px]"></h2>
           <p className="font-bold text-2xl mb-[15px]">{item.name}</p>
@@ -131,7 +138,9 @@ const ProductDetailPage = () => {
                 <div className="flex">
                   {/* User Container */}
                   {/* User Profile Picture */}
-                  <img src={getImageURL(review)} alt="" className="w-20 h-20 rounded-full mr-4" />
+                  <a href={`/user/${review.author}`}>
+                    <img src={getUserImageURL(review)} alt="" className="w-20 h-20 rounded-full mr-4" />
+                  </a>
                   {/* Review Body */}
                   <div>
                     <p className="text-lg text-gray-700">{review.body}</p>

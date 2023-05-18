@@ -4,6 +4,9 @@ import axios from 'axios';
 const LoginPage = () => {
   // Log In and Sign Up Frontend Status
   const [isLogin, setIsLogin] = useState(true);
+  if(sessionStorage.getItem("user")) {
+    window.location.href = "http://localhost:3000/product-listing/category/all";
+  }
 
   // Form
   const [username, setUsername] = useState("");

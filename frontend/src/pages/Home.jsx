@@ -1,7 +1,7 @@
 import Navbar from "../layouts/Navbar.jsx"
 import Hero from "../assets/hero.jpg"
-import Product from "../assets/IPhone_14_Pro.jpg"
 import { useState, useEffect } from 'react';
+import StarDisplay from "../components/StarDisplay.jsx";
 import axios from 'axios';
 
 const Home = () => {
@@ -30,6 +30,11 @@ const Home = () => {
     fetchRecentActivities();
     fetchTrendingProducts();
   }, []);
+
+  const getProductImageURL = (product) => {
+    return "/products/" +  product + ".jpg"
+  }
+
   return (
     <div>
       <Navbar />
@@ -50,9 +55,9 @@ const Home = () => {
             {/* Products Grid */}
             <div className="grid grid-flow-col py-5 auto-cols-mobileTrending overflow-x-auto h-auto mx-3 gap-x-10 md:gap-0 md:py-0 md:grid-cols-5">
               {trendingProducts.map(trendingProduct => (
-                <div key={trendingProduct._id} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none">
+                <div key={trendingProduct.image} className="flex flex-col p-3 sm:p-5 border-solid border rounded-md border-borderColor md:border-none shadow-[0_0_10px_0_rgba(0,0,0,0.1)]">
                   {/* Product Image */}
-                  <img src={Product} alt="" className="xl:w-3/4 mx-auto"/>
+                  <img src={getProductImageURL(trendingProduct._id)} alt="" className="xl:w-3/4 mx-auto"/>
                   {/* Product Title */}
                   <p className="text-center text-xs sm:text-sm md:text-base font-sans">{trendingProduct.name}</p>
                 </div>
@@ -64,29 +69,33 @@ const Home = () => {
             {/* Top Button */}
             <div className="text-center sm:flex sm:justify-evenly sm:items-center">
               <p className="text-white text-base sm:text-xl font-sans font-normal p-5">Grade your gadgets</p>
-              <a href="/login"><button className="bg-buttonColor text-white text-base font-bold font-sans rounded-md px-10 py-5">GRADE NOW</button></a>
+              <a href={sessionStorage.getItem("user") ? "/product-listing/category/all" : "/login"}><button className="bg-buttonColor text-white text-base font-bold font-sans rounded-md px-10 py-5">GRADE NOW</button></a>
             </div>
             {/* Bottom Button */}
             <div className="text-center sm:flex sm:justify-evenly sm:items-center pb-5 sm:pb-0" >
               <p className="text-white text-base sm:text-xl font-sans font-normal p-5">Find your gadgets</p>
-              <a href="/product-listing"><button className="bg-buttonColor text-white text-base font-bold font-sans rounded-md px-10 py-5">FIND NOW</button></a>
+              <a href="/product-listing/category/all"><button className="bg-buttonColor text-white text-base font-bold font-sans rounded-md px-10 py-5">FIND NOW</button></a>
             </div>
           </div>
         </div>
         {/* Recent Activity Container */}
         <div className="grid grid-flow-col auto-cols-mobileActivity overflow-x-auto gap-x-10 mx-3 pb-5 md:pb-0 md:mx-0 md:mt-[2%] sm:auto-cols-largeMobileActivity lg:grid-flow-row lg:grid-cols-5 lg:gap-10">
           {recentActivities.map(recent => (
-            <div key={recent._id} className="flex flex-col border border-solid border-borderColor rounded-md p-5 gap-y-2">
+            <div key={recent._id} className="flex flex-col border border-solid border-borderColor rounded-md p-5 gap-y-2 shadow-[0_0_10px_0_rgba(0,0,0,0.1)]">
                {/* Title */}
               <p>{recent.product.name}</p>
               {/* Stars */}
-              <p>{'*'.repeat(recent.rating)}</p>
+              <div className="mb-2">
+                    <StarDisplay rating={recent.rating} />
+                  </div>
               {/* User + Time Duration Since Post */}
-              <p>{`${recent.author.username} + ${new Date(recent.timeStamp).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`}</p>
+              <p className="text-gray-500 text-sm">{`User: ${recent.author.username}`}</p>
+              <p className="text-gray-500 text-xs">{`${new Date(recent.timeStamp).toLocaleString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`}</p>
               {/* Product Image */}
-              <img src={Product} alt="" />
+              <img src={getProductImageURL(recent.product.image)} alt="" className="p-3 border border-solid border-borderColor rounded-md"/>
               {/* Review's body (Limit:97 characters + '...', which is added after pulling data) */}
-              <p>{recent.body.length > 97 ? recent.body.substring(0, 97) + "..." : recent.body}</p>
+              <p>Review:</p>
+              <p className="font-light font-sans text-sm border border-solid border-borderColor rounded-md">{recent.body.length > 97 ? recent.body.substring(0, 97) + "..." : recent.body}</p>
             </div>
           ))}
         </div>
