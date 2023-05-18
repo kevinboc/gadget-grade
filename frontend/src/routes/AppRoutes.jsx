@@ -3,7 +3,7 @@ import Home from "../pages/Home"
 import ProductListing from "../pages/ProductListing"
 import Login from "../pages/Login"
 import Product from "../pages/Product"
-import UserProfile from "../pages/userProfile"
+import UserProfile from "../pages/UserProfile"
 import ReviewPage from "../pages/ReviewPage"
 
 const AppRoutes = () => {

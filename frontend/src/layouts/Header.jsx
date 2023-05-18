@@ -40,10 +40,10 @@ const Header = () => {
             onClick={handleSearch}
           />
           {sessionStorage.getItem("user") ? (
-                <>
-                    <p className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleProfile}>{JSON.parse(sessionStorage.getItem("user")).username}</p>
+                <div className="flex flex-row item-center">
+                    <p className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto cursor-pointer" onClick={handleProfile}>{JSON.parse(sessionStorage.getItem("user")).username}</p>
                     <button className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto" onClick={handleSignOut}>Sign Out</button>
-                </>
+                </div>
             ) : (
                 <a href="/login" className="font-sans font-bold text-base text-white px-2 hidden md:flex mt-auto mb-auto">LOG IN / SIGN UP</a>
             )}

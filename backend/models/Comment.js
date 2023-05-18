@@ -4,11 +4,19 @@ const commentSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
-        required: true
+        required: true,
+        validate: {
+            validator: async function (value) {
+                const user = await mongoose.model('User').findById(value);
+                return user !== null;
+            },
+            message: 'Invalid author'
+        }
     },
     body: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 250
     },
     timeStamp: {
         type: Date,
@@ -18,7 +26,14 @@ const commentSchema = new mongoose.Schema({
     review: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
-        required: true
+        required: true,
+        validate: {
+            validator: async function (value) {
+                const review = await mongoose.model('Review').findById(value);
+                return review !== null;
+            },
+            message: 'Invalid review'
+        }
     }
 });
 

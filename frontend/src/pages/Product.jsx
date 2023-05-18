@@ -32,17 +32,6 @@ const ProductDetailPage = () => {
     fetchItemReviews()
   }, []);
 
-  const getImage = async (filename) => 
-  {
-    try {
-      const image = await import("../assets/users/"+filename+".jpg")
-      console.log
-      return image.default
-    } catch (error) {
-      console.error(`Error loading image: ${filename}`, error);
-    }
-  };
-
   const handleReviewButton = () => {
     if(sessionStorage.getItem("user")) {
       window.location.href = `/review/${id}`;
@@ -138,7 +127,7 @@ const ProductDetailPage = () => {
             <div className="flex">
               {/* User Container */}
               {/* User Profile Picture */}
-              <img src={getImage(review.author)} alt="" className="w-20 h-20 rounded-full mr-4"/>
+              <img src="" alt="" className="w-20 h-20 rounded-full mr-4"/>
               {/* Review Body */}
               <div>
                 <p className="text-lg text-gray-700">{review.body}</p>
