@@ -24,6 +24,7 @@ exports.addReview = async function(req, res) {
       // update product in db
       res.status(201).json(savedReview);
     } catch (err) {
+      console.log(err)
       res.status(500).send({message: 'An error occurred while adding the review.'});
     }
 };
@@ -87,6 +88,7 @@ exports.getReview = async function(req, res) {
         const updatedReview = await Review.findByIdAndUpdate(req.params._id, req.body, {new:true});
         res.status(200).json(updatedReview);
     } catch (err) {
+      console.log(err)
       res.status(500).send({message: 'An error occurred updating review.'});
     }  
   }

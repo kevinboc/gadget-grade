@@ -50,20 +50,15 @@ const reviewSchema = new mongoose.Schema({
     },
     usersLiked: {
         type: [String],
+        default: [],
         unique: true,
-        default: []
+        sparse: true
     },
     usersDisliked: {
         type: [String],
-        unique: true,
         default: [],
-        validate: {
-            validator: async function (value) {
-                const product = await mongoose.model('Product').findById(value);
-                return product !== null;
-            },
-            message: 'Invalid product'
-        }
+        unique: true,
+        sparse: true
     }
         
 });
