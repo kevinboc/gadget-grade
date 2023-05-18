@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { useParams } from "react-router-dom"
 import StarRating from "../components/StarRating.jsx"
 import axios from "axios";
 import Navbar from "../layouts/Navbar.jsx"
-import Product from "../assets/IPhone_14_Pro.jpg"
 
 const ReviewPage = () => {
     const { id } = useParams();
@@ -23,7 +22,7 @@ const ReviewPage = () => {
           }
         }
         fetchItem()
-      }, []);
+      }, [id]);
 
     const handleRatingChange = (value) => {
         setRating(value);
@@ -82,42 +81,49 @@ const ReviewPage = () => {
     }
     }, []);
 
+    const getProductImageURL = () => {
+        return "/products/" +  id + ".jpg"
+      }
+
   return (
     
     <div>
         <Navbar/>
-        <div className="p-4">
-        <h2 className="text-2xl font-bold mb-4">Write a Review For The {item.name}</h2>
-        
-        <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Rating:</label>
-            <StarRating rating={rating} onRatingChange={handleRatingChange} />
+        <div className="p-4 flex flex-col">
+            <h2 className="text-2xl font-bold mb-4">Write a Review For The {item.name}</h2>
+            <div className="overflow-hidden h-[50vh] w-auto pb-5">
+                <img src={getProductImageURL()} alt="" className="h-full w-auto p-5 border border-solid border-borderColor rounded-md shadow-[0_0_10px_0_rgba(0,0,0,0.1)]" />
             </div>
-            <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Review Title:</label>
-            <input 
-                type="text"
-                value={title}
-                onChange={handleTitleChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Review title"
-            />
-            </div>
-            <div className="mb-4">
-            <label className="block text-sm font-bold mb-2">Review:</label>
-            <textarea 
-                value={review}
-                onChange={handleReviewChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Write your review here"
-                rows="5"
-            />
-            </div>
-            <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Submit
-            </button>
-        </form>
+            
+            <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                <label className="block text-sm font-bold mb-2">Rating:</label>
+                <StarRating rating={rating} onRatingChange={handleRatingChange} />
+                </div>
+                <div className="mb-4">
+                <label className="block text-sm font-bold mb-2">Review Title:</label>
+                <input 
+                    type="text"
+                    value={title}
+                    onChange={handleTitleChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Review title"
+                />
+                </div>
+                <div className="mb-4">
+                <label className="block text-sm font-bold mb-2">Review:</label>
+                <textarea 
+                    value={review}
+                    onChange={handleReviewChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    placeholder="Write your review here"
+                    rows="5"
+                />
+                </div>
+                <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Submit
+                </button>
+            </form>
         </div>
     </div>
   );
