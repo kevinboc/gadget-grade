@@ -11,7 +11,6 @@ const User = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [newDescription, setNewDescription] = useState('');
     const [error, setError] = useState(null);
-    const [imageURL, setImageURL] = useState("")
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -33,27 +32,9 @@ const User = () => {
               console.error("Error fetching items", error)
             }
         }
-
-        const checkImageExistence = async () => {
-            const imagePath = getUserImageURL(id);
-            
-            try {
-              const response = await fetch(imagePath);
-              if (response.ok) {
-                setImageURL(imagePath); // File exists, set the image URL
-              } else {
-                console.log("default")
-                setImageURL("/users/default.png"); // File doesn't exist, set the fallback URL
-              }
-            } catch (error) {
-              console.error(error);
-              setImageURL("/users/default.png"); // Error occurred, set the fallback URL
-            }
-        };
       
         fetchProfile()
         fetchUserReviews()
-        checkImageExistence()
       }, [id]);
 
     const handleEditClick = () => {
@@ -83,8 +64,8 @@ const User = () => {
         }
     }
 
-    const getUserImageURL = (user) => {
-        return "/users/" + user + ".jpg";
+    const getUserImageURL = () => {
+        return "/users/" + profile.image + ".svg";
     };
 
     const getProductImageURL = (product) => {
@@ -98,7 +79,7 @@ const User = () => {
                 {/* Left Container */}
                 <div className ="flex flex-col w-[20%] h-full">
                     <div className="rounded-md border-[4px] p-10 border-solid border-black w-full h-auto">
-                        <img src={imageURL} alt="" className="rounded-md border-[2px] p-1 border-solid border-black w-full h-auto" />
+                        <img src={getUserImageURL()} alt="" className="rounded-md border-[2px] p-1 border-solid border-black w-full h-auto" />
                     </div>
 
                     <div className="mt-[2%] flex bg-gray-200 rounded-lg shadow-md p-2">
