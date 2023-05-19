@@ -29,24 +29,37 @@ exports.getAllProducts = async function(req, res) {
     }
 };
 
-exports.getCategory = async function(req,res) {
+exports.getCategory = async function(req, res) {
   try {
-    const sortField = req.query.sort;
-    const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
-    // Build the sort object
-    const sortObject = {};
-    if (sortField) {
-        sortObject[sortField] = sortOrder;
-    }
+      const sortField = req.query.sort;
+      const sortOrder = req.query.order === 'desc' ? -1 : 1; // Use 1 for ascending, -1 for descending
+      const sortObject = {};
+      if (sortField) {
+          sortObject[sortField] = sortOrder;
+      }
+      
+      // Split categories into AND and OR groups
+      const categoryGroups = req.params.category.split('+');
+      const orCategories = categoryGroups[0].split('-');
+      const andCategories = categoryGroups.length > 1 ? categoryGroups[1].split('-') : [];
 
-    // Assume categories is a comma-separated list in the URL
-    const categories = req.params.category.split('-');
-    const categoryRegexes = categories.map(category => new RegExp(`^${category}$`, 'i'));
-    
-    const products = await Product.find({categories: {$in: categoryRegexes}}).sort(sortObject);
-    res.status(200).json(products);
+      // Build regular expressions for each category
+      const orCategoryRegexes = orCategories.map(category => new RegExp(`^${category}$`, 'i'));
+      const andCategoryRegexes = andCategories.map(category => new RegExp(`^${category}$`, 'i'));
+
+      // Build the query object
+      const queryObject = {};
+      if (orCategoryRegexes.length > 0) {
+          queryObject.categories = {$in: orCategoryRegexes};
+      }
+      if (andCategoryRegexes.length > 0) {
+          queryObject.categories = {...queryObject.categories, $all: andCategoryRegexes};
+      }
+
+      const products = await Product.find(queryObject).sort(sortObject);
+      res.status(200).json(products);
   } catch (err) {
-    res.status(500).send({message: 'An error occurred retrieving category.'});
+      res.status(500).send({message: 'An error occurred retrieving category.'});
   }
 };
 
