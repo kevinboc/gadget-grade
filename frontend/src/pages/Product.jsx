@@ -3,11 +3,15 @@ import { useState, useEffect  } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios";
 import StarDisplay from "../components/StarDisplay"
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetailPage = () => {
   const { id } = useParams();
   const[item, setItem] = useState({});
   const[reviews, setReviews] = useState([]);
+  const [newComment, setNewComment] = useState({});
+  const [comments, setComments] = useState({}); // Comments will be an object where each key is a reviewId and the value is an array of comments
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -28,20 +32,30 @@ const ProductDetailPage = () => {
       }
     }
 
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get('http://localhost:3500/comment/product/'+id); // Assuming this endpoint returns comments for all reviews of a product
+        console.log(response)
+        setComments(response.data); // The response should be in the format {reviewId1: [comment1, comment2, ...], reviewId2: [...], ...}
+      } catch (error) {
+        console.error("Error fetching comments", error);
+      }
+    }
+  
     fetchItem()
     fetchItemReviews()
+    fetchComments()
   }, [id]);
 
   const handleReviewButton = () => {
     if(sessionStorage.getItem("user")) {
-      window.location.href = `/review/${id}`;
+      navigate(`/review/${id}`);
     } else {
-      window.location.href = `/login`;
+      navigate(`/login`);
     }
   }
 
   const getUserImageURL = (review) => {
-    console.log(review.author)
     return "/users/" +  review.author + ".jpg"
   }
 
@@ -53,7 +67,7 @@ const ProductDetailPage = () => {
     try {
       const user = sessionStorage.getItem('user');
       if(review.usersDisliked.includes(user)) {
-        review.usersDisliked.pop(user)
+        review.usersDisliked = review.usersDisliked.filter(u => u !== user);
         review.dislike--
         review.usersLiked.push(user)
         review.like++
@@ -82,7 +96,7 @@ const ProductDetailPage = () => {
     try {
       const user = sessionStorage.getItem('user');
       if(review.usersLiked.includes(user)) {
-        review.usersLiked.pop(user)
+        review.usersLiked = review.usersLiked.filter(u => u !== user);
         review.like--
         review.usersDisliked.push(user)
         review.dislike++
@@ -104,6 +118,25 @@ const ProductDetailPage = () => {
       }
     } catch (error) {
       console.error("Error liking review", error);
+    }
+  }
+
+  const handleCommentSubmit = async (reviewId, productId) => {
+    try {
+      console.log('test')
+      const author = JSON.parse(sessionStorage.getItem('user'))
+      console.log( newComment[reviewId])
+      const response = await axios.post('http://localhost:3500/comment', { 
+        body: newComment[reviewId],
+        author: author._id,
+        review: reviewId,
+        product: productId
+      });
+      console.log(response)
+      setNewComment({...newComment, [reviewId]: ''});
+      fetchComments()
+    } catch (error) {
+      console.error("Error adding comment", error);
     }
   }
 
@@ -175,6 +208,33 @@ const ProductDetailPage = () => {
                     </button>
                     <span className="px-3 py-1 text-red-500 font-bold">{review.dislike}</span>
                   </div>
+
+                  <div>
+                    <h4>Comments:</h4>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                      <input 
+                        style={{borderRadius: '5px', borderColor: '#ddd', marginBottom: '10px'}} 
+                        placeholder="Write a comment..."
+                        value={newComment[review._id] || ''}
+                        onChange={event => setNewComment({...newComment, [review._id]: event.target.value})}
+                      />
+                      <button 
+                        style={{borderRadius: '5px', backgroundColor: '#007BFF', color: 'white', padding: '10px', cursor: 'pointer'}}
+                        onClick={() => handleCommentSubmit(review._id, review.product)}
+                      >
+                        Submit
+                      </button>
+                    </div>
+                    {
+                      comments[review._id] ? comments[review._id].map((comment, index) => (
+                        <div key={index} style={{border: '1px solid #ddd', borderRadius: '5px', padding: '10px', marginTop: '10px'}}>
+                          <p style={{marginBottom: '0'}}><strong>{console.log(comment.author.name)}</strong></p>
+                          <p>{comment.body}</p>
+                        </div>
+                      )) : "No comments yet"
+                    }
+                  </div>
+
                 </div>
               </div>
             ))

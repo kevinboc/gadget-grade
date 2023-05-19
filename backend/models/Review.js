@@ -51,14 +51,10 @@ const reviewSchema = new mongoose.Schema({
     usersLiked: {
         type: [String],
         default: [],
-        unique: true,
-        sparse: true
     },
     usersDisliked: {
         type: [String],
         default: [],
-        unique: true,
-        sparse: true
     }
         
 });

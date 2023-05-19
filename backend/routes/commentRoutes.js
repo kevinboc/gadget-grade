@@ -8,6 +8,9 @@ router.route("")
 router.route("/review/:reviewId")
     .get(controller.getReviewComments);
 
+router.route("/product/:productId")
+    .get(controller.getProductComments);
+
 router.route("/user/:userId")
     .get(controller.getUserComments);
 
