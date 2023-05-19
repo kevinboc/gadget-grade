@@ -40,7 +40,7 @@ exports.getProductComments = async function(req, res) {
         return;
     }
 
-    const comments = await Comment.find({ product: productId }).populate('review').exec();
+    const comments = await Comment.find({ product: productId }).populate('review').populate('author').exec();
     // Map comments to the corresponding reviewId
     let commentsMappedByReviewId = {};
     comments.forEach(comment => {

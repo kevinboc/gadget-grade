@@ -35,7 +35,6 @@ const ProductDetailPage = () => {
     const fetchComments = async () => {
       try {
         const response = await axios.get('http://localhost:3500/comment/product/'+id); // Assuming this endpoint returns comments for all reviews of a product
-        console.log(response)
         setComments(response.data); // The response should be in the format {reviewId1: [comment1, comment2, ...], reviewId2: [...], ...}
       } catch (error) {
         console.error("Error fetching comments", error);
@@ -56,7 +55,7 @@ const ProductDetailPage = () => {
   }
 
   const getUserImageURL = (review) => {
-    return "/users/" +  review.author + ".jpg"
+    return "/users/" +  review.author._id + ".jpg"
   }
 
   const getProductImageURL = () => {
@@ -123,9 +122,7 @@ const ProductDetailPage = () => {
 
   const handleCommentSubmit = async (reviewId, productId) => {
     try {
-      console.log('test')
       const author = JSON.parse(sessionStorage.getItem('user'))
-      console.log( newComment[reviewId])
       const response = await axios.post('http://localhost:3500/comment', { 
         body: newComment[reviewId],
         author: author._id,
@@ -163,17 +160,21 @@ const ProductDetailPage = () => {
       </div>
       <div className="mt-[20px]">
         <h4 className="font-bold">Reviews:</h4>
-        <div className="h-[500px] overflow-y-auto">
+        <div className="h-fit">
           {
             reviews.map(review => (
               <div key={review._id} className="flex items-start justify-between bg-white p-6 rounded-lg shadow-md mb-4">
                 {/* Left Container */}
                 <div className="flex">
                   {/* User Container */}
-                  {/* User Profile Picture */}
-                  <a href={`/user/${review.author}`}>
-                    <img src={getUserImageURL(review)} alt="" className="w-20 h-20 rounded-full mr-4" />
-                  </a>
+                  <div className="flex flex-col">
+                    <p className="text-lg text-gray-700 font-bold">{review.author.username} {review.title}</p>
+                    {/* User Profile Picture */}
+                    <a href={`/user/${review.author._id}`}>
+                      <img src={getUserImageURL(review)} alt="" className="w-20 h-20 rounded-full mr-4" />
+                    </a>
+                  </div>
+
                   {/* Review Body */}
                   <div>
                     <p className="text-lg text-gray-700">{review.body}</p>
@@ -228,7 +229,7 @@ const ProductDetailPage = () => {
                     {
                       comments[review._id] ? comments[review._id].map((comment, index) => (
                         <div key={index} style={{border: '1px solid #ddd', borderRadius: '5px', padding: '10px', marginTop: '10px'}}>
-                          <p style={{marginBottom: '0'}}><strong>{console.log(comment.author.name)}</strong></p>
+                          <p style={{marginBottom: '0'}}><strong>{comment.author.username}</strong></p>
                           <p>{comment.body}</p>
                         </div>
                       )) : "No comments yet"
