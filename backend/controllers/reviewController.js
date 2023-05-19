@@ -20,6 +20,9 @@ exports.addReview = async function(req, res) {
       product.rating = Number(product.ratingCount / product.reviewCount).toFixed(1);
       const updatedProduct = await Product.findByIdAndUpdate(req.body.product, product, {new:true});
       author.reviews++;
+      if(author.reviews == 10) {
+        author.active = true
+      }
       const updatedUser = await User.findByIdAndUpdate(req.body.author, author, {new:true})
       // update product in db
       res.status(201).json(savedReview);
