@@ -40,7 +40,7 @@ exports.getProductReviews = async function (req, res) {
           sortObject[sortField] = sortOrder;
       }
       // Find and sort the reviews
-      const reviews = await Review.find({ product: req.params.productId }).sort(sortObject);
+      const reviews = await Review.find({ product: req.params.productId }).sort(sortObject).populate('author');
       res.status(200).json(reviews);
   } catch (err) {
       res.status(500).send({ message: 'An error occurred while getting the product reviews.' });

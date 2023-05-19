@@ -39,7 +39,6 @@ const ReviewPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const author = JSON.parse(sessionStorage.getItem('user'))
-        console.log(author)
     
         // Validation 
         if (rating <= 0) {

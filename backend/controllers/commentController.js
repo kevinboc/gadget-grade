@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
 Comment = mongoose.model('Comment');
+Product = mongoose.model('Product');
 var ObjectID = require('mongodb').ObjectID;
 
 exports.addComment = async function(req, res) {
@@ -8,6 +9,7 @@ exports.addComment = async function(req, res) {
       const savedComment = await newComment.save();
       res.status(201).json(savedComment);
     } catch (err) {
+      console.log(err)
       res.status(500).send({message: 'An error occurred while adding the comment.'});
     }
 };
@@ -26,6 +28,34 @@ exports.getReviewComments = async function(req, res) {
     } catch (err) {
         res.status(500).send({message: 'An error occurred while getting the review comments.'});
     }
+}
+
+exports.getProductComments = async function(req, res) {
+  try {
+    const { productId } = req.params;
+    const product = await Product.findById(productId);
+    
+    if(!product){
+        res.status(404).send("Product not found");
+        return;
+    }
+
+    const comments = await Comment.find({ product: productId }).populate('review').populate('author').exec();
+    // Map comments to the corresponding reviewId
+    let commentsMappedByReviewId = {};
+    comments.forEach(comment => {
+        if(commentsMappedByReviewId[comment.review._id]) {
+            commentsMappedByReviewId[comment.review._id].push(comment);
+        } else {
+            commentsMappedByReviewId[comment.review._id] = [comment];
+        }
+    });
+
+    res.status(200).json(commentsMappedByReviewId);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send("Server error");
+  }
 }
 
 exports.getUserComments = async function(req, res) {

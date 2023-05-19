@@ -5,13 +5,6 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
-        validate: {
-            validator: async function (value) {
-                const user = await mongoose.model('User').findById(value);
-                return user !== null;
-            },
-            message: 'Invalid author'
-        }
     },
     body: {
         type: String,
@@ -27,13 +20,11 @@ const commentSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Review',
         required: true,
-        validate: {
-            validator: async function (value) {
-                const review = await mongoose.model('Review').findById(value);
-                return review !== null;
-            },
-            message: 'Invalid review'
-        }
+    },
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Product',
+        required: true,
     }
 });
 
