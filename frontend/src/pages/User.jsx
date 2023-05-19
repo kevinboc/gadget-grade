@@ -2,15 +2,17 @@ import Navbar from "../layouts/Navbar.jsx"
 import { useState, useEffect  } from "react"
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import StarDisplay from "../components/StarDisplay";
+import StarDisplay from "../components/StarDisplay.jsx";
 
-const UserProfile = () => {
+const User = () => {
     const { id } = useParams();
     const [profile, setProfile] = useState({});
     const [reviews, setReviews] = useState([]);
     const [isEditing, setIsEditing] = useState(false);
     const [newDescription, setNewDescription] = useState('');
     const [error, setError] = useState(null);
+    const [imageURL, setImageURL] = useState("")
+
     useEffect(() => {
         const fetchProfile = async () => {
           try {
@@ -31,9 +33,27 @@ const UserProfile = () => {
               console.error("Error fetching items", error)
             }
         }
-    
+
+        const checkImageExistence = async () => {
+            const imagePath = getUserImageURL(id);
+            
+            try {
+              const response = await fetch(imagePath);
+              if (response.ok) {
+                setImageURL(imagePath); // File exists, set the image URL
+              } else {
+                console.log("default")
+                setImageURL("/users/default.png"); // File doesn't exist, set the fallback URL
+              }
+            } catch (error) {
+              console.error(error);
+              setImageURL("/users/default.png"); // Error occurred, set the fallback URL
+            }
+        };
+      
         fetchProfile()
         fetchUserReviews()
+        checkImageExistence()
       }, [id]);
 
     const handleEditClick = () => {
@@ -64,12 +84,12 @@ const UserProfile = () => {
     }
 
     const getUserImageURL = (user) => {
-        return "/users/" +  user + ".jpg"
-      }
+        return "/users/" + user + ".jpg";
+    };
 
     const getProductImageURL = (product) => {
         return "/products/" +  product + ".jpg"
-      }
+    }
 
     return (
         <div>
@@ -77,8 +97,8 @@ const UserProfile = () => {
             <div className="flex flex-row justify-between gap-x-5 h-screen w-auto m-[5%]">
                 {/* Left Container */}
                 <div className ="flex flex-col w-[20%] h-full">
-                    <div className="">
-                        <img src={getUserImageURL(id)} alt="Hero Image" className="rounded-md border-[4px] p-1 border-solid border-black w-full h-auto" />
+                    <div className="rounded-md border-[4px] p-10 border-solid border-black w-full h-auto">
+                        <img src={imageURL} alt="" className="rounded-md border-[2px] p-1 border-solid border-black w-full h-auto" />
                     </div>
 
                     <div className="mt-[2%] flex bg-gray-200 rounded-lg shadow-md p-2">
@@ -114,7 +134,7 @@ const UserProfile = () => {
 
                         <div className="flex-col mt-[2%] h-3/5">
                             <h1 className="font-bold mt-2">User Description:</h1>
-                            {isEditing && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                            {isEditing ? (
                                 <div>
                                     <textarea
                                         className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto"
@@ -138,7 +158,7 @@ const UserProfile = () => {
                             ) : (
                                 <div>
                                     <p className="bg-gray-100 mt-1 p-2 rounded-lg shadow-md h-full w-full break-words whitespace-pre-wrap overflow-auto">{profile.description}</p>
-                                    {JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                                    {sessionStorage.getItem("user") && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
                                         <button 
                                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-2 "
                                         onClick={handleEditClick}
@@ -155,10 +175,10 @@ const UserProfile = () => {
                 </div>
 
                 {/* Right Container */}
-                <div className="w-[80%] h-full bg-gray-200 p-3 rounded-lg shadow-md">
+                <div className="w-[80%] h-full bg-gray-200 p-3 rounded-lg shadow-md overflow-y-auto">
                     <h1 className="font-bold text-lg mb-2">Recent Activity:</h1>
 
-                    <div className="flex flex-col gap-y-5 overflow-auto">
+                    <div className="flex flex-col gap-y-5">
                         {reviews.map(review => (
                             <div key={review._id} className="bg-white p-4 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)] overflow-hidden flex flex-row h-[25vh] gap-x-2">
                                 {/* Image */}
@@ -198,4 +218,4 @@ const UserProfile = () => {
     )
 }
 
-export default UserProfile
+export default User
