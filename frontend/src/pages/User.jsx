@@ -175,10 +175,10 @@ const User = () => {
                 </div>
 
                 {/* Right Container */}
-                <div className="w-[80%] h-full bg-gray-200 p-3 rounded-lg shadow-md">
+                <div className="w-[80%] h-full bg-gray-200 p-3 rounded-lg shadow-md overflow-y-auto">
                     <h1 className="font-bold text-lg mb-2">Recent Activity:</h1>
 
-                    <div className="flex flex-col gap-y-5 overflow-auto">
+                    <div className="flex flex-col gap-y-5">
                         {reviews.map(review => (
                             <div key={review._id} className="bg-white p-4 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)] overflow-hidden flex flex-row h-[25vh] gap-x-2">
                                 {/* Image */}
