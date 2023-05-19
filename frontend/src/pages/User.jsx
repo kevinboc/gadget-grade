@@ -3,6 +3,7 @@ import { useState, useEffect  } from "react"
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import StarDisplay from "../components/StarDisplay.jsx";
+import {FcCheckmark} from "react-icons/fc"
 
 const User = () => {
     const { id } = useParams();
@@ -84,7 +85,10 @@ const User = () => {
 
                     <div className="mt-[2%] flex bg-gray-200 rounded-lg shadow-md p-2">
                         <h1 className="font-bold w-1/2">Reviews: {profile.reviews}</h1>
-                        <h1 className="font-bold">Verified: </h1>
+                        <div className="flex flex-row items-center gap-x-1">
+                            <h1 className="font-bold">Verified: </h1>
+                            {profile.active ? <FcCheckmark /> : ("")}
+                        </div>
                     </div>
 
                     <div className=" flex-col flex-1 mt-[3%] bg-gray-200 bg-opacity-50 h-auto p-2 rounded-lg shadow-md">

@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema({
     },
     active: {
         type: Boolean,
-        default: true
+        default: false
     },
     reviews: {
         type: Number,
@@ -58,9 +58,7 @@ const userSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: function () {
-            return this._id.toString()
-        }
+        default: "default"
     }
 });
 
