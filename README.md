@@ -57,7 +57,7 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 2. Open repo in your IDE
 3. Open the built in terminal 
 4. Install NPM packages (ensure you're outside the backend and frontend folders)
-   ```sh
+  ```sh
    npm install
    ```
 5. Once installation is complete, run the program (ensure you're outside the backend and frontend folders)
