@@ -22,7 +22,6 @@ exports.getAllProducts = async function(req, res) {
           sortObject[sortField] = sortOrder;
       }
       const products = await Product.find({}).sort(sortObject);
-      console.log(JSON.stringify(products))
       res.status(200).json(products);
     } catch (err) {
       res.status(500).send({message: 'An error occurred while retrieving the products.'});
@@ -103,33 +102,4 @@ exports.searchProducts = async function(req, res) {
   }
 };
 
-exports.getTrendingProducts = async function(req, res) {
-    try {
-        const trendingProducts = await getTrendingProducts();
-        res.status(200).json(trendingProducts);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'An error occurred while fetching trending products' });
-    }
-};
 
-// import Moment.js for date manipulation
-const moment = require('moment'); 
-async function getTrendingProducts() {
-  // get the date one week ago
-  const oneWeekAgo = moment().subtract(7, 'days').toDate();
-  const recentReviews = await Review.aggregate([
-    // find reviews from the past week
-    {$match: {timeStamp: {$gte: oneWeekAgo}}},
-    {$group: {_id: '$product', count: {$sum: 1}}},
-    // sort by review count in descending order
-    {$sort: {count: -1}},
-    // limit the result to 5 products
-    {$limit: 5},
-  ]);
-  // get the product IDs from the aggregation result
-  const productIds = recentReviews.map(review => review._id);
-  // fetch product details using the product IDs
-  const products = await Product.find({ _id: {$in: productIds}});
-  return products;
-}

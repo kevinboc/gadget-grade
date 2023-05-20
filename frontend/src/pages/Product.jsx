@@ -15,6 +15,8 @@ const ProductDetailPage = () => {
   const navigate = useNavigate();
   const [showComments, setShowComments] = useState({});
   const [errors, setErrors] = useState({}); 
+  const [reviewed, setReviewed] = useState(false)
+
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -43,17 +45,36 @@ const ProductDetailPage = () => {
         console.error("Error fetching comments", error);
       }
     }
-  
+
+    const isReviewed = async () => {
+      try {
+          const response = await axios.get('http://localhost:3500/review/product/' + id)
+          const user = JSON.parse(sessionStorage.getItem('user'));
+          response.data.map((review) => {
+              if(review.author._id === user._id) {
+                console.log("setting to true")
+                  setReviewed(true)
+              }
+          })
+        } catch (error) {
+          console.error("Error fetching items", error)
+        }
+    }
+
+    isReviewed()
     fetchItem()
     fetchItemReviews()
     fetchComments()
   }, [id]);
 
   const handleReviewButton = () => {
-    if(sessionStorage.getItem("user")) {
-      navigate(`/review/${id}`);
-    } else {
-      navigate(`/login`);
+    if(!reviewed) {
+      if(sessionStorage.getItem("user")) {
+        navigate(`/review/${id}`);
+      } 
+      else {
+        navigate(`/login`);
+      }
     }
   }
 
@@ -133,8 +154,10 @@ const ProductDetailPage = () => {
         review: reviewId,
         product: productId
       });
-      console.log(response)
-      setNewComment({...newComment, [reviewId]: ''});
+      if(response.data !== null) {
+        setNewComment({...newComment, [reviewId]: ''});
+      }
+      window.location.reload()
       // fetchComments()
     } catch (error) {
       setErrors((prevErrors) => ({
@@ -297,21 +320,6 @@ const ProductDetailPage = () => {
                     ) : (
                       <p>No comments yet</p>
                     )}
-                      {comments[review._id] ? (
-                        comments[review._id].map((comment, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-300 rounded-md p-4 mt-4 flex flex-col"
-                          >
-                            <p className="mb-0">
-                              <strong>{comment.author.username}</strong>
-                            </p>
-                            <p>{comment.body}</p>
-                          </div>
-                        ))
-                      ) : (
-                        <p>No comments yet</p>
-                      )}
                   </div>
                 </div>
               </div>

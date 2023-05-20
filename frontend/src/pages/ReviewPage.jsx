@@ -11,6 +11,8 @@ const ReviewPage = () => {
     const [title, setTitle] = useState("");
     const [review, setReview] = useState("");
     const[item, setItem] = useState({});
+    const [errors, setErrors] = useState({})
+    const [reviewed, setReviewed] = useState(false)
 
     useEffect(() => {
         const fetchItem = async () => {
@@ -21,6 +23,21 @@ const ReviewPage = () => {
             console.error("Error fetching items", error)
           }
         }
+
+        const isReviewed = async () => {
+            try {
+                const response = await axios.get('http://localhost:3500/review/product/' + id)
+                response.data.map((review) => {
+                    if(review.author._id === sessionStorage.getItem('user')._id) {
+                        setReviewed(true)
+                    }
+                })
+              } catch (error) {
+                console.error("Error fetching items", error)
+              }
+        }
+
+        isReviewed()
         fetchItem()
       }, [id]);
 
@@ -37,24 +54,39 @@ const ReviewPage = () => {
     };
 
     const handleSubmit = async (e) => {
+        setErrors({})
         e.preventDefault();
         const author = JSON.parse(sessionStorage.getItem('user'))
-    
+        let pass = true;
+
         // Validation 
         if (rating <= 0) {
-            alert("Please select a rating.");
-            return;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                ratingError: "Invalid rating.",
+              }));
+            pass = false;
         }
     
         if (title.trim().length === 0) {
-            alert("Please enter a review title.");
-            return;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                titleError: "Invalid title.",
+              }));
+            pass = false;
         }
     
         if (review.trim().length === 0) {
-            alert("Please enter your review.");
-            return;
+            setErrors((prevErrors) => ({
+                ...prevErrors,
+                bodyError: "Invalid body.",
+              }));
+            pass = false;
         }
+
+       if(!pass) {
+        return;
+       }
     
         // Proceed with the post request
         try {
@@ -75,10 +107,10 @@ const ReviewPage = () => {
     useEffect(() => {
     const user = sessionStorage.getItem('user');
 
-    if (!user) {
+    if (!user || reviewed) {
         window.location.href = "http://localhost:3000/login"
     }
-    }, []);
+    }, [reviewed]);
 
     const getProductImageURL = () => {
         return "/products/" +  id + ".jpg"
@@ -107,6 +139,8 @@ const ReviewPage = () => {
                     onChange={handleTitleChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Review title"
+                    required
+                    minLength={1}
                 />
                 </div>
                 <div className="mb-4">
@@ -117,8 +151,16 @@ const ReviewPage = () => {
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     placeholder="Write your review here"
                     rows="5"
+                    required
+                    minLength={1}
+                    maxLength={500}
                 />
                 </div>
+                {Object.keys(errors).map((key) => (
+                    <p key={key} style={{ color: 'red', marginTop: '5px' }}>
+                        {errors[key]}
+                    </p>
+                ))}
                 <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Submit
                 </button>
