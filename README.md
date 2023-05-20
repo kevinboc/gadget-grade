@@ -31,7 +31,7 @@
 - [![Node][node.js]][node-url]
 - [![React][react.js]][react-url]
 - [![Express][express.js]][express-url]
-- [![Tailwind][tailwindcss]][tailwind-url]
+- [![Tailwind][tailwindcss]][tailwindcss-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
