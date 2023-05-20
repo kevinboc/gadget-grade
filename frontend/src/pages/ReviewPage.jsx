@@ -107,7 +107,7 @@ const ReviewPage = () => {
     useEffect(() => {
     const user = sessionStorage.getItem('user');
 
-    if (!user || !reviewed) {
+    if (!user || reviewed) {
         window.location.href = "http://localhost:3000/login"
     }
     }, [reviewed]);

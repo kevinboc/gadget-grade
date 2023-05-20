@@ -31,6 +31,7 @@
 - [![Node][node.js]][node-url]
 - [![React][react.js]][react-url]
 - [![Express][express.js]][express-url]
+- [![Tailwind][tailwindcss]][tailwind-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -41,7 +42,8 @@
 
 This is an example of how to list things you need to use the software and how to install them.
 
-- npm
+1. Install node.js
+2. Install npm
   ```sh
   npm install npm@latest -g
   ```
@@ -53,10 +55,14 @@ This is an example of how to list things you need to use the software and how to
 git clone https://github.com/RESIDGE/gadget-grade.git
 ```
 2. Open repo in your IDE
-3. Open the built in terminal
-4. Install NPM packages
+3. Open the built in terminal 
+4. Install NPM packages (ensure you're outside the backend and frontend folders)
    ```sh
    npm install
+   ```
+5. Once installation is complete, run the program (ensure you're outside the backend and frontend folders)
+  ```sh
+   npm run dev
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -70,3 +76,5 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 [react-url]: https://reactjs.org/
 [express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
 [express-url]: https://expressjs.com/
+[tailwindcss]: https://tailwindcss.com/
+[tailwindcss-url]: https://tailwindcss.com/

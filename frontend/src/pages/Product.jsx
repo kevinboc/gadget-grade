@@ -68,7 +68,6 @@ const ProductDetailPage = () => {
   }, [id]);
 
   const handleReviewButton = () => {
-    console.log(reviewed)
     if(!reviewed) {
       if(sessionStorage.getItem("user")) {
         navigate(`/review/${id}`);
@@ -155,8 +154,10 @@ const ProductDetailPage = () => {
         review: reviewId,
         product: productId
       });
-      console.log(response)
-      setNewComment({...newComment, [reviewId]: ''});
+      if(response.data !== null) {
+        setNewComment({...newComment, [reviewId]: ''});
+      }
+      window.location.reload()
       // fetchComments()
     } catch (error) {
       setErrors((prevErrors) => ({
@@ -319,21 +320,6 @@ const ProductDetailPage = () => {
                     ) : (
                       <p>No comments yet</p>
                     )}
-                      {comments[review._id] ? (
-                        comments[review._id].map((comment, index) => (
-                          <div
-                            key={index}
-                            className="border border-gray-300 rounded-md p-4 mt-4 flex flex-col"
-                          >
-                            <p className="mb-0">
-                              <strong>{comment.author.username}</strong>
-                            </p>
-                            <p>{comment.body}</p>
-                          </div>
-                        ))
-                      ) : (
-                        <p>No comments yet</p>
-                      )}
                   </div>
                 </div>
               </div>

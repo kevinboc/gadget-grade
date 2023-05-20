@@ -71,11 +71,11 @@ const User = () => {
         setSelectedValue(value);
     };
 
-    const handleProfileImageClick = async (event) => {
-        event.preventDefault();
+    const handleProfileImageClick = async () => {
         try {
             const response = await axios.put(`http://localhost:3500/user/${id}`, { image: selectedValue })
             setReviews(response.data);
+            window.location.reload()
         } catch (error) {
             console.error("Error fetching items", error)
         }
@@ -110,11 +110,13 @@ const User = () => {
                     {profile.active && sessionStorage.getItem("user") && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
                         <div className="mt-[2%] flex flex-row items-center gap-x-1 bg-gray-200 rounded-lg shadow-md p-2">
                             <label htmlFor="images" className="text-center">Select Image:</label>
-                            <select className="bg-gray-200" onChange={handleProfileImageChange}>
-                                <option value="volvo">Volvo</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
+                            <select className="bg-gray-200" defaultValue={profile.image} onChange={handleProfileImageChange}>
+                                <option value="bear">Bear</option>
+                                <option value="dragon">Dragon</option>
+                                <option value="phoenix">Phoenix</option>
+                                <option value="shark">Shark</option>
+                                <option value="tiger">Tiger</option>
+                                <option value="default">Earth</option>
                             </select>
                             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-2" onClick={handleProfileImageClick}>
                                 Update
@@ -122,7 +124,9 @@ const User = () => {
                         </div>
                     ) : 
                         sessionStorage.getItem("user") && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
-                            <p>Verified Only Option</p>
+                            <div className="mt-[2%] flex flex-row items-center gap-x-1 bg-gray-200 rounded-lg shadow-md p-2">
+                                <p className="font-bold">Reach 10 reviews to unlock a special option</p>
+                            </div>
                         ) : (
                             ""
                         )

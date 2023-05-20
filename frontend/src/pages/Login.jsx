@@ -322,7 +322,7 @@ const LoginPage = () => {
   // Password Confirm Validation (Backend: Form response, Frontend: realtime css check )
   const isPasswordConfirmValid = () => {
     const pattern = /^[a-zA-Z0-9]+$/;
-    return pattern.test(passwordConfirm) && passwordConfirm.length > 11;
+    return pattern.test(passwordConfirm) && passwordConfirm.length > 7;
   };
   // Confirm Password Validation Styling
   const getInputConfirmPassStyle = () => {
