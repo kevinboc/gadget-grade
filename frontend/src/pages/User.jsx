@@ -207,10 +207,12 @@ const User = () => {
                     <div className="flex flex-col gap-y-5">
                         {reviews.map(review => (
                             <div key={review._id} className="bg-white p-4 rounded-lg shadow-[0_0_10px_0_rgba(0,0,0,0.1)] overflow-hidden flex flex-row h-[25vh] gap-x-2">
+                                <a href={`/product/${review.product}`} >
                                 {/* Image */}
-                                <div className="">
-                                    <img src={getProductImageURL(review.product)} alt="" className="h-full w-auto p-2" />
+                                <div className="h-[20vh]">
+                                    <img src={getProductImageURL(review.product)} alt="" className="h-full w-auto p-2"/>
                                 </div>
+                                </a>
 
                                 {/* Title and Rating and Body Container */}
                                <div className="flex flex-col flex-1 items-center p-2">
