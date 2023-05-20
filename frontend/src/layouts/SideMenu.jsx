@@ -71,7 +71,7 @@ const SideMenu = ({ nav, setNav }) => {
           <div className="flex flex-col my-auto px-6">
             {/* Accessories */}
             <div className="flex flex-row justify-between items-center my-auto" onClick={() => setAccessories(!accessories)}>
-              <a href="/product-listing"><p className="text-white text-lg font-sans active:underline">Accessories</p></a>
+              <a href="/product-listing/category/accessories"><p className="text-white text-lg font-sans active:underline">Accessories</p></a>
               {!accessories ? (
                 <RiArrowDropDownLine color="white" size={25} /> 
               ) : (
@@ -80,18 +80,18 @@ const SideMenu = ({ nav, setNav }) => {
             </div>
             {accessories ? (
               <div className="flex flex-col items-start pl-6">
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Smartwatches</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Headphones</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Cameras</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Speakers</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Drones</a>
+                <a href="/product-listing/category/accessories+smartwatches" className="font-sans text-lg text-white text-center active:underline">Smartwatches</a>
+                <a href="/product-listing/category/accessories+headphones" className="font-sans text-lg text-white text-center active:underline">Headphones</a>
+                <a href="/product-listing/category/accessories+cameras" className="font-sans text-lg text-white text-center active:underline">Cameras</a>
+                <a href="/product-listing/category/accessories+speakers" className="font-sans text-lg text-white text-center active:underline">Speakers</a>
+                <a href="/product-listing/category/accessories+drones" className="font-sans text-lg text-white text-center active:underline">Drones</a>
               </div>
             ) : (
               ""
             )}
             {/* Cell Phones */}
             <div className="flex flex-row justify-between items-center my-auto" onClick={() => setCell(!cell)}>
-              <a href="/product-listing"><p className="text-white text-lg font-sans active:underline">Cell Phones</p></a>
+              <a href="/product-listing/category/cellphones"><p className="text-white text-lg font-sans active:underline">Cell Phones</p></a>
               {!cell ? (
                 <RiArrowDropDownLine color="white" size={25} /> 
               ) : (
@@ -100,18 +100,18 @@ const SideMenu = ({ nav, setNav }) => {
             </div>
             {cell ? (
               <div className="flex flex-col items-start pl-6">
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Apple</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Samsung</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">Xiaomi</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">OPPO</a>
-                <a href="/product-listing" className="font-sans text-lg text-white text-center active:underline">vivo</a>
+                <a href="/product-listing/category/cellphones+apple" className="font-sans text-lg text-white text-center active:underline">Apple</a>
+                <a href="/product-listing/category/cellphones+samsung" className="font-sans text-lg text-white text-center active:underline">Samsung</a>
+                <a href="/product-listing/category/cellphones+google" className="font-sans text-lg text-white text-center active:underline">Google</a>
+                <a href="/product-listing/category/cellphones+oneplus" className="font-sans text-lg text-white text-center active:underline">OnePlus</a>
+                <a href="/product-listing/category/cellphones+motorola" className="font-sans text-lg text-white text-center active:underline">Motorola</a>
               </div>
             ) : (
               ""
             )}
             {/* Computers & Tablets */}
             <div className="flex flex-row justify-between items-center my-auto" onClick={() => setCmpAndTablt(!cmpAndTablt)}>
-              <a href="/product-listing"><p className="text-white text-lg font-sans active:underline">Computers & Tablets</p></a>
+              <a href="/product-listing/category/computers-tablets"><p className="text-white text-lg font-sans active:underline">Computers & Tablets</p></a>
               {!cmpAndTablt ? (
                 <RiArrowDropDownLine color="white" size={25} /> 
               ) : (
@@ -120,23 +120,23 @@ const SideMenu = ({ nav, setNav }) => {
             </div>
             {cmpAndTablt ? (
               <div className="flex flex-col items-start pl-6">
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Computers</a>
+                <a href="/product-listing/category/computers" className="font-sans text-lg text-white text-center active:underline">Computers</a>
                 <div className="pl-6 flex flex-col">
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Dell</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">HP</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Apple</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Lenovo</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Microsoft</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Asus</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Acer</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Razer</a>
+                  <a href="/product-listing/category/computers+dell" className="font-sans text-lg text-white active:underline">Dell</a>
+                  <a href="/product-listing/category/computers+hp" className="font-sans text-lg text-white active:underline">HP</a>
+                  <a href="/product-listing/category/computers+apple" className="font-sans text-lg text-white active:underline">Apple</a>
+                  <a href="/product-listing/category/computers+lenovo" className="font-sans text-lg text-white active:underline">Lenovo</a>
+                  <a href="/product-listing/category/computers+microsoft" className="font-sans text-lg text-white active:underline">Microsoft</a>
+                  <a href="/product-listing/category/computers+asus" className="font-sans text-lg text-white active:underline">Asus</a>
+                  <a href="/product-listing/category/computers+acer" className="font-sans text-lg text-white active:underline">Acer</a>
+                  <a href="/product-listing/category/computers+razer" className="font-sans text-lg text-white active:underline">Razer</a>
                 </div>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Tablets</a>
+                <a href="/product-listing/category/tablets" className="font-sans text-lg text-white text-center active:underline">Tablets</a>
                 <div className="pl-6 flex flex-col">
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Apple</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Microsoft</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Samsung</a>
-                  <a href="/productlisting" className="font-sans text-lg text-white active:underline">Amazon</a>
+                  <a href="/product-listing/category/tablets+apple" className="font-sans text-lg text-white active:underline">Apple</a>
+                  <a href="/product-listing/category/tablets+microsoft" className="font-sans text-lg text-white active:underline">Microsoft</a>
+                  <a href="/product-listing/category/tablets+samsung" className="font-sans text-lg text-white active:underline">Samsung</a>
+                  <a href="/product-listing/category/tablets+amazon" className="font-sans text-lg text-white active:underline">Amazon</a>
                 </div>
               </div>
             ) : (
@@ -144,7 +144,7 @@ const SideMenu = ({ nav, setNav }) => {
             )}
             {/* Gaming */}
             <div className="flex flex-row justify-between items-center my-auto" onClick={() => setGaming(!gaming)}>
-              <a href="/product-listing"><p className="text-white text-lg font-sans active:underline">Gaming</p></a>
+              <a href="/product-listing/category/gaming"><p className="text-white text-lg font-sans active:underline">Gaming</p></a>
               {!gaming ? (
                 <RiArrowDropDownLine color="white" size={25} />
               ) : (
@@ -153,16 +153,16 @@ const SideMenu = ({ nav, setNav }) => {
             </div>
             {gaming ? (
               <div className="flex flex-col items-start pl-6">
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Playstation</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Xbox</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Nintendo Switch</a>
+                <a href="/product-listing/category/gaming+playstation" className="font-sans text-lg text-white text-center active:underline">Playstation</a>
+                <a href="/product-listing/category/gaming+xbox" className="font-sans text-lg text-white text-center active:underline">Xbox</a>
+                <a href="/product-listing/category/gaming+nintendoswitch" className="font-sans text-lg text-white text-center active:underline">Nintendo Switch</a>
               </div>
             ) : (
               ""
             )}
             {/* TV & Home Theater */}
             <div className="flex flex-row justify-between items-center my-auto" onClick={() => setTV(!tv)}>
-              <a href="/product-listing"><p className="text-white text-lg font-sans active:underline">TV & Home Theater</p></a>
+              <a href="/product-listing/category/tv-hometheater"><p className="text-white text-lg font-sans active:underline">TV & Home Theater</p></a>
               {!tv ? (
                 <RiArrowDropDownLine color="white" size={25} /> 
               ) : (
@@ -171,12 +171,12 @@ const SideMenu = ({ nav, setNav }) => {
             </div>
             {tv ? (
               <div className="flex flex-col items-start pl-6">
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Samsung</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">LG</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Sony</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Vizio</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Insignia</a>
-                <a href="/productlisting" className="font-sans text-lg text-white text-center active:underline">Hisene</a>
+                <a href="/product-listing/category/tv+samsung" className="font-sans text-lg text-white text-center active:underline">Samsung</a>
+                <a href="/product-listing/category/tv+lg" className="font-sans text-lg text-white text-center active:underline">LG</a>
+                <a href="/product-listing/category/tv+sony" className="font-sans text-lg text-white text-center active:underline">Sony</a>
+                <a href="/product-listing/category/tv+vizio" className="font-sans text-lg text-white text-center active:underline">Vizio</a>
+                <a href="/product-listing/category/tv+insignia" className="font-sans text-lg text-white text-center active:underline">Insignia</a>
+                <a href="/product-listing/category/tv+hisense" className="font-sans text-lg text-white text-center active:underline">Hisene</a>
               </div>
             ) : (
               ""
