@@ -7,6 +7,7 @@ import User from "../pages/User"
 import ReviewPage from "../pages/ReviewPage"
 import AboutUs from "../pages/AboutUs"
 import PrivacyPolicy from "../pages/PrivacyPolicy"
+import ContactUs from "../pages/ContactUs"
 
 const AppRoutes = () => {
   return (
@@ -20,6 +21,7 @@ const AppRoutes = () => {
           <Route path="/review/:id" element={<ReviewPage />}/>
           <Route path="/about-us" element={<AboutUs />}/>
           <Route path="/privacy-policy" element={<PrivacyPolicy />}/>
+          <Route path="/contact-us" element={<ContactUs />}/>
 
         </Routes>
   </BrowserRouter>
