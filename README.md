@@ -76,5 +76,5 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 [react-url]: https://reactjs.org/
 [express.js]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
 [express-url]: https://expressjs.com/
-[tailwindcss]: https://tailwindcss.com/
+[tailwindcss]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tailwindcss-url]: https://tailwindcss.com/
