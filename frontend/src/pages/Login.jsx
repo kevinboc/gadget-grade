@@ -290,7 +290,7 @@ const LoginPage = () => {
   // Password Validation (Backend: Form response, Frontend: realtime css check )
   const isPasswordValid = () => {
     const pattern = /^[a-zA-Z0-9]+$/;
-    return pattern.test(password) && password.length > 11;
+    return pattern.test(password) && password.length > 7;
   };
   // Password Validation Styling
   const getInputPassStyle = () => {
@@ -418,7 +418,7 @@ const LoginPage = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           onKeyDown={validatePasswordInput}
-          minLength={!isLogin ? 12 : ""}
+          minLength={!isLogin ? 8 : ""}
           className={getInputPassStyle(password)}
           required
         />

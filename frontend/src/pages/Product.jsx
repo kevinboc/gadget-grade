@@ -15,6 +15,8 @@ const ProductDetailPage = () => {
   const navigate = useNavigate();
   const [showComments, setShowComments] = useState({});
   const [errors, setErrors] = useState({}); 
+  const [reviewed, setReviewed] = useState(false)
+
 
   useEffect(() => {
     const fetchItem = async () => {
@@ -43,17 +45,37 @@ const ProductDetailPage = () => {
         console.error("Error fetching comments", error);
       }
     }
-  
+
+    const isReviewed = async () => {
+      try {
+          const response = await axios.get('http://localhost:3500/review/product/' + id)
+          const user = JSON.parse(sessionStorage.getItem('user'));
+          response.data.map((review) => {
+              if(review.author._id === user._id) {
+                console.log("setting to true")
+                  setReviewed(true)
+              }
+          })
+        } catch (error) {
+          console.error("Error fetching items", error)
+        }
+    }
+
+    isReviewed()
     fetchItem()
     fetchItemReviews()
     fetchComments()
   }, [id]);
 
   const handleReviewButton = () => {
-    if(sessionStorage.getItem("user")) {
-      navigate(`/review/${id}`);
-    } else {
-      navigate(`/login`);
+    console.log(reviewed)
+    if(!reviewed) {
+      if(sessionStorage.getItem("user")) {
+        navigate(`/review/${id}`);
+      } 
+      else {
+        navigate(`/login`);
+      }
     }
   }
 

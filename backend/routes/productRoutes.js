@@ -12,8 +12,7 @@ router.route("/category/:category")
 router.route("/search/:searchTerm")
     .get(controller.searchProducts)
 
-router.route("/trending")
-    .get(controller.getTrendingProducts)
+
 
 router.route("/:_id")
     .get(controller.getProduct)

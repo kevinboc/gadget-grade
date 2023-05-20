@@ -12,6 +12,7 @@ const User = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [newDescription, setNewDescription] = useState('');
     const [error, setError] = useState(null);
+    const [selectedValue, setSelectedValue] = useState("");
 
     useEffect(() => {
         const fetchProfile = async () => {
@@ -25,7 +26,6 @@ const User = () => {
         }
 
         const fetchUserReviews = async () => {
-            console.log('test')
             try {
               const response = await axios.get('http://localhost:3500/review/user/'+id)
               setReviews(response.data);
@@ -65,6 +65,22 @@ const User = () => {
         }
     }
 
+    const handleProfileImageChange = (event) => {
+        // Access the selected value using event.target.value
+        const value = event.target.value;
+        setSelectedValue(value);
+    };
+
+    const handleProfileImageClick = async (event) => {
+        event.preventDefault();
+        try {
+            const response = await axios.put(`http://localhost:3500/user/${id}`, { image: selectedValue })
+            setReviews(response.data);
+        } catch (error) {
+            console.error("Error fetching items", error)
+        }
+    }
+
     const getUserImageURL = () => {
         return "/users/" + profile.image + ".svg";
     };
@@ -90,6 +106,27 @@ const User = () => {
                             {profile.active ? <FcCheckmark /> : ("")}
                         </div>
                     </div>
+
+                    {profile.active && sessionStorage.getItem("user") && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                        <div className="mt-[2%] flex flex-row items-center gap-x-1 bg-gray-200 rounded-lg shadow-md p-2">
+                            <label htmlFor="images" className="text-center">Select Image:</label>
+                            <select className="bg-gray-200" onChange={handleProfileImageChange}>
+                                <option value="volvo">Volvo</option>
+                                <option value="saab">Saab</option>
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </select>
+                            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-2 mb-2" onClick={handleProfileImageClick}>
+                                Update
+                            </button>
+                        </div>
+                    ) : 
+                        sessionStorage.getItem("user") && JSON.parse(sessionStorage.getItem("user"))._id === id ? (
+                            <p>Verified Only Option</p>
+                        ) : (
+                            ""
+                        )
+                    }
 
                     <div className=" flex-col flex-1 mt-[3%] bg-gray-200 bg-opacity-50 h-auto p-2 rounded-lg shadow-md">
 
