@@ -124,7 +124,7 @@ const ProductListing = () => {
             <img src={getProductImageURL(item._id)} alt="" className="h-[200px] w-auto mx-auto" />
           </div>
           {/* Title */}
-          <p className="text-center text-sm">{item.name}</p>
+          <p className="text-center text-sm px-2">{item.name}</p>
           {/* Average Rating + (# of ratings) */}
           <div className="flex flex-row items-center justify-center h-fit">
               <StarDisplay rating={item.rating} />

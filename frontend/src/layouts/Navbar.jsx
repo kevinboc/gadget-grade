@@ -27,9 +27,9 @@ const Navbar = () => {
               <div className="invisible peer-hover/cell:visible hover:visible absolute bg-white min-w-full w-auto z-10 p-2 flex flex-col">
                   <a href="/product-listing/category/cellphones+apple" className="font-normal hover:underline">Apple</a>
                   <a href="/product-listing/category/cellphones+samsung" className="font-normal hover:underline">Samsung</a>
-                  <a href="/product-listing/category/cellphones+xiaomi" className="font-normal hover:underline">Xiaomi</a>
-                  <a href="/product-listing/category/cellphones+oppo" className="font-normal hover:underline">OPPO</a>
-                  <a href="/product-listing/category/cellphones+vivo" className="font-normal hover:underline">vivo</a>
+                  <a href="/product-listing/category/cellphones+google" className="font-normal hover:underline">Google</a>
+                  <a href="/product-listing/category/cellphones+oneplus" className="font-normal hover:underline">OnePlus</a>
+                  <a href="/product-listing/category/cellphones+motorola" className="font-normal hover:underline">Motorola</a>
               </div>
             </li>
             <li className="relative inline-block mt-auto mb-auto list-none font-sans font-semibold text-m">
@@ -40,7 +40,7 @@ const Navbar = () => {
               <div className="invisible peer-hover/cmpNTablt:visible hover:visible absolute bg-white min-w-full w-auto z-10 p-2 flex flex-col">
                 <div className="flex flex-col">
                   <div className="flex flex-row justify-between items-center border-y-[1px] border-solid border-borderColor">
-                    <a href="/product-listing/category/computers" className="font-normal hover:underline">Computers</a>
+                    <a href="/product-listing/category/computers" className="font-semibold hover:underline">Computers</a>
                   </div>
                   <div className="bg-white flex flex-col">
                       <a href="/product-listing/category/computers+dell" className="font-normal hover:underline">Dell</a>
@@ -50,7 +50,7 @@ const Navbar = () => {
                       <a href="/product-listing/category/computers+microsoft" className="font-normal hover:underline">Microsoft</a>
                   </div>
                   <div className="flex flex-row justify-between items-center peer/cmp border-y-[1px] border-solid border-borderColor">
-                    <a href="/product-listing/category/tablets" className="font-normal hover:underline">Tablets</a>
+                    <a href="/product-listing/category/tablets" className="font-semibold hover:underline">Tablets</a>
                   </div>
                   <div className="bg-white flex flex-col">
                       <a href="/product-listing/category/tablets+apple" className="font-normal hover:underline">Apple</a>
@@ -79,7 +79,7 @@ const Navbar = () => {
               </div>
               <div className="invisible peer-hover/tv:visible hover:visible absolute bg-white min-w-full w-auto z-10 p-2 flex flex-col">
                   <div className="flex flex-row justify-between items-center border-y-[1px] border-solid border-borderColor">
-                    <a href="/product-listing/category/tv" className="font-normal hover:underline">TV</a>
+                    <a href="/product-listing/category/tv" className="font-semibold hover:underline">TV</a>
                   </div>
                   <a href="/product-listing/category/tv+samsung" className="font-normal hover:underline">Samsung</a>
                   <a href="/product-listing/category/tv+lg" className="font-normal hover:underline">LG</a>
@@ -88,7 +88,7 @@ const Navbar = () => {
                   <a href="/product-listing/category/tv+insignia" className="font-normal hover:underline">Insignia</a>
                   <a href="/product-listing/category/tv+hisene" className="font-normal hover:underline">Hisene</a>
                   <div className="flex flex-row justify-between items-center border-y-[1px] border-solid border-borderColor">
-                    <a href="/product-listing/category/hometheather" className="font-normal hover:underline">Home Theater</a>
+                    <a href="/product-listing/category/hometheater" className="font-semibold hover:underline">Home Theater</a>
                   </div>
               </div>
             </li>
