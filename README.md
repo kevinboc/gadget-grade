@@ -88,4 +88,4 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 [tailwindcss-url]: https://tailwindcss.com/
 [mongodb]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
 [mongodb-url]: https://www.mongodb.com/
-[]
+
