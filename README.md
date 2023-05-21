@@ -25,6 +25,7 @@
 ## About The Project
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 This project is an electronic review site. Create your account, browse for products, leave a review, and comment on other reviews.
 Unlock custom user profile images once you hit TEN reviews. Clone this repository and run it locally.
 
