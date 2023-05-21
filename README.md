@@ -46,14 +46,18 @@ Unlock custom user profile images once you hit TEN reviews. Clone this repositor
 
 This is an example of how to list things you need to use the software and how to install them.
 
-1. Install node.js
-2. Install npm
+1. Install node.js (Download the LTS for your respective operating system)
+https://nodejs.org/en
+2. Install npm in your terminal/command prompt
   ```sh
   npm install npm@latest -g
   ```
+3. Install Git
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
 
 ### Installation
 
+1. Open your terminal or command prompt
 1. Clone the repo
 ```sh
 git clone https://github.com/RESIDGE/gadget-grade.git
@@ -84,3 +88,4 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 [tailwindcss-url]: https://tailwindcss.com/
 [mongodb]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
 [mongodb-url]: https://www.mongodb.com/
+[]
