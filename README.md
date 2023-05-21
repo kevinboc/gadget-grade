@@ -29,18 +29,13 @@
 This project is an electronic review site. Create your account, browse for products, leave a review, and comment on other reviews.
 Unlock custom user profile images once you hit TEN reviews. Clone this repository and run it locally.
 
-The repositories for the hosting of our repositories (the code changed to allow deployment):
-1. Frontend: https://github.com/RESIDGE/gadget-grade-frontend
-2. Backend: https://github.com/RESIDGE/gadget-grade-backend
-
-Hosting website url: https://gadget-grade.onrender.com/
-
 ### Built With
 
 - [![Node][node.js]][node-url]
 - [![React][react.js]][react-url]
 - [![Express][express.js]][express-url]
 - [![Tailwind][tailwindcss]][tailwindcss-url]
+- [![MongoDB][mongodb]][mongodb-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -87,3 +82,5 @@ git clone https://github.com/RESIDGE/gadget-grade.git
 [express-url]: https://expressjs.com/
 [tailwindcss]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tailwindcss-url]: https://tailwindcss.com/
+[mongodb]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[mongodb-url]: https://www.mongodb.com/
