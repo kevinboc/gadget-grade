@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <div>
         {/* Nav Bar */}
-        <nav className="hidden md:flex h-[10vh] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] flex-row justify-between items-start px-[5%] z-5">
+        <nav className="hidden md:flex h-[8vh] shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] flex-row justify-between items-start px-[5%] z-5">
             <li className="relative inline-block mt-auto mb-auto list-none font-sans font-semibold text-m">
               <div className="flex flex-row peer/accss">
                 <a href="/product-listing/category/accessories" className="hover:underline">Accessories</a>
